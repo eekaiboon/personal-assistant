@@ -21,26 +21,22 @@ from assistant_agents.activity import build_activity_agent
 from assistant_agents.culinary import build_culinary_agent
 from assistant_agents.foodie import build_foodie_agent
 from assistant_agents.planner import build_planner_agent
-from assistant_agents.coordinator import build_coordinator_agent
+from assistant_agents.coordinator import build_coordinator_agent, run_coordinator_agent
 
 # Load environment variables
 load_dotenv()
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
+# Use logger configured by event_hooks.py
 logger = logging.getLogger(__name__)
 
 @dataclass
 class AssistantAgentBundle:
     """Bundle containing all agent instances."""
-    head_coordinator: object
-    activity: object
-    culinary: object
-    foodie: object
-    planner: object
+    head_coordinator: Agent
+    activity: Agent
+    culinary: Agent
+    foodie: Agent
+    planner: Agent
 
 
 def build_assistant_agents() -> AssistantAgentBundle:
@@ -53,13 +49,14 @@ def build_assistant_agents() -> AssistantAgentBundle:
     # Configure OpenAI client (handles API keys, alternative endpoints, etc.)
     configure_openai_client()
         
-    # Get model configuration from environment
+    # Get configuration from environment
     model = os.environ.get("MODEL", "gpt-4")
+    max_turns = int(os.environ.get("MAX_TURNS", 2))
     logger.info(f"Using model: {model}")
     
-    logger.info("Building assistant agents with OpenAI Agent SDK...")
+    logger.info("Initializing agent system...")
     
-    # Build specialist agents
+    # Build specialist agents (silently)
     activity_agent = build_activity_agent(model=model)
     culinary_agent = build_culinary_agent(model=model)
     foodie_agent = build_foodie_agent(model=model)
@@ -98,8 +95,8 @@ async def run_assistant_with_query(query: str) -> dict:
     
     logger.info(f"Processing query: {query}")
     try:
-        # Use the Agent SDK Runner to execute the query
-        response = await bundle.head_coordinator.process(query)
+        # Use the coordinator agent to process the query
+        response = await run_coordinator_agent(query, bundle.head_coordinator)
         logger.info("Query processing complete")
         return response
     except Exception as e:
