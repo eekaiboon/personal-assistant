@@ -1,0 +1,382 @@
+{
+  "home": {
+    "name": "Home (Sunnyvale)",
+    "coordinates": {
+      "latitude": 37.3688,
+      "longitude": -122.0363
+    },
+    "city": "Sunnyvale",
+    "state": "CA",
+    "country": "USA"
+  },
+  "frequent_locations": [
+    {
+      "name": "Happy Hollow Zoo",
+      "coordinates": {
+        "latitude": 37.3124,
+        "longitude": -121.8549
+      },
+      "city": "San Jose",
+      "state": "CA",
+      "distance_from_home_miles": 16.5
+    },
+    {
+      "name": "Palo Alto Junior Museum & Zoo",
+      "coordinates": {
+        "latitude": 37.4403,
+        "longitude": -122.1428
+      },
+      "city": "Palo Alto",
+      "state": "CA",
+      "distance_from_home_miles": 8.7
+    },
+    {
+      "name": "Seven Seas Park",
+      "coordinates": {
+        "latitude": 37.4069,
+        "longitude": -122.0235
+      },
+      "city": "Sunnyvale",
+      "state": "CA",
+      "distance_from_home_miles": 2.8
+    },
+    {
+      "name": "Old Fremont Preserve",
+      "coordinates": {
+        "latitude": 37.2937,
+        "longitude": -122.0638
+      },
+      "city": "Cupertino",
+      "state": "CA",
+      "distance_from_home_miles": 7.2
+    },
+    {
+      "name": "Villa Montalvo",
+      "coordinates": {
+        "latitude": 37.2566,
+        "longitude": -122.0357
+      },
+      "city": "Saratoga",
+      "state": "CA",
+      "distance_from_home_miles": 12.6
+    },
+    {
+      "name": "Stanford Shopping Center",
+      "coordinates": {
+        "latitude": 37.4435,
+        "longitude": -122.1699
+      },
+      "city": "Palo Alto",
+      "state": "CA",
+      "distance_from_home_miles": 9.8
+    },
+    {
+      "name": "Mr. Bao",
+      "coordinates": {
+        "latitude": 37.3946,
+        "longitude": -122.0813
+      },
+      "city": "Mountain View",
+      "state": "CA",
+      "distance_from_home_miles": 6.5
+    },
+    {
+      "name": "Ramen Nagi",
+      "coordinates": {
+        "latitude": 37.4438,
+        "longitude": -122.1607
+      },
+      "city": "Palo Alto",
+      "state": "CA",
+      "distance_from_home_miles": 9.2
+    },
+    {
+      "name": "Drunken Monk",
+      "coordinates": {
+        "latitude": 37.4020,
+        "longitude": -122.2004
+      },
+      "city": "Menlo Park",
+      "state": "CA",
+      "distance_from_home_miles": 12.1
+    },
+    {
+      "name": "Ondam",
+      "coordinates": {
+        "latitude": 37.3520,
+        "longitude": -121.9731
+      },
+      "city": "Santa Clara",
+      "state": "CA",
+      "distance_from_home_miles": 5.3
+    }
+  ],
+  "weekend_getaways": [
+    {
+      "name": "Santa Cruz",
+      "coordinates": {
+        "latitude": 36.9741,
+        "longitude": -122.0308
+      },
+      "state": "CA",
+      "distance_from_home_miles": 38.5,
+      "driving_time_minutes": 50,
+      "attractions": [
+        "Santa Cruz Beach Boardwalk",
+        "Natural Bridges State Beach",
+        "Mystery Spot",
+        "Roaring Camp Railroads"
+      ],
+      "kid_friendly": true
+    },
+    {
+      "name": "Half Moon Bay",
+      "coordinates": {
+        "latitude": 37.4636,
+        "longitude": -122.4286
+      },
+      "state": "CA",
+      "distance_from_home_miles": 32.7,
+      "driving_time_minutes": 45,
+      "attractions": [
+        "Half Moon Bay State Beach",
+        "Pescadero State Beach",
+        "Harley Farms Goat Dairy",
+        "Lemos Farm (great for kids)"
+      ],
+      "kid_friendly": true
+    },
+    {
+      "name": "Monterey",
+      "coordinates": {
+        "latitude": 36.6002,
+        "longitude": -121.8947
+      },
+      "state": "CA",
+      "distance_from_home_miles": 72.5,
+      "driving_time_minutes": 85,
+      "attractions": [
+        "Monterey Bay Aquarium",
+        "Cannery Row",
+        "17-Mile Drive",
+        "Dennis the Menace Playground"
+      ],
+      "kid_friendly": true
+    },
+    {
+      "name": "Napa Valley",
+      "coordinates": {
+        "latitude": 38.5025,
+        "longitude": -122.2654
+      },
+      "state": "CA",
+      "distance_from_home_miles": 81.2,
+      "driving_time_minutes": 95,
+      "attractions": [
+        "Castello di Amorosa (kid-friendly winery with animals)",
+        "Old Faithful Geyser of California",
+        "Petrified Forest",
+        "Safari West"
+      ],
+      "kid_friendly": true
+    },
+    {
+      "name": "Point Reyes",
+      "coordinates": {
+        "latitude": 38.0405,
+        "longitude": -122.8000
+      },
+      "state": "CA",
+      "distance_from_home_miles": 95.8,
+      "driving_time_minutes": 115,
+      "attractions": [
+        "Point Reyes Lighthouse",
+        "Elephant Seal Overlook",
+        "Bear Valley Visitor Center",
+        "Point Reyes Beaches"
+      ],
+      "kid_friendly": true
+    }
+  ],
+  "travel_times": [
+    {
+      "origin": "Sunnyvale",
+      "destination": "Palo Alto",
+      "driving_minutes": 20,
+      "driving_distance_miles": 8.5,
+      "routes": [
+        {
+          "name": "US-101",
+          "minutes": 20
+        },
+        {
+          "name": "Central Expressway",
+          "minutes": 25
+        }
+      ],
+      "traffic_notes": "Heavy traffic during commute hours (7-9 AM, 4-7 PM)"
+    },
+    {
+      "origin": "Sunnyvale",
+      "destination": "Mountain View",
+      "driving_minutes": 12,
+      "driving_distance_miles": 5.8,
+      "routes": [
+        {
+          "name": "US-101",
+          "minutes": 12
+        },
+        {
+          "name": "Central Expressway",
+          "minutes": 15
+        }
+      ],
+      "traffic_notes": "Moderate traffic during commute hours"
+    },
+    {
+      "origin": "Sunnyvale",
+      "destination": "San Jose",
+      "driving_minutes": 22,
+      "driving_distance_miles": 12.3,
+      "routes": [
+        {
+          "name": "US-101",
+          "minutes": 22
+        },
+        {
+          "name": "CA-87",
+          "minutes": 25
+        }
+      ],
+      "traffic_notes": "Heavy traffic during commute hours, especially northbound in mornings and southbound in evenings"
+    },
+    {
+      "origin": "Sunnyvale",
+      "destination": "Saratoga",
+      "driving_minutes": 18,
+      "driving_distance_miles": 8.2,
+      "routes": [
+        {
+          "name": "CA-85",
+          "minutes": 18
+        },
+        {
+          "name": "Saratoga-Sunnyvale Rd",
+          "minutes": 20
+        }
+      ],
+      "traffic_notes": "Generally good traffic flow except during rush hours"
+    },
+    {
+      "origin": "Sunnyvale",
+      "destination": "Santa Cruz",
+      "driving_minutes": 50,
+      "driving_distance_miles": 38.5,
+      "routes": [
+        {
+          "name": "CA-17",
+          "minutes": 50
+        },
+        {
+          "name": "CA-85 to CA-17",
+          "minutes": 55
+        }
+      ],
+      "traffic_notes": "Heavy traffic on weekends, especially during summer. CA-17 can be slow due to winding mountain roads."
+    },
+    {
+      "origin": "Sunnyvale",
+      "destination": "San Francisco",
+      "driving_minutes": 45,
+      "driving_distance_miles": 40.2,
+      "routes": [
+        {
+          "name": "US-101",
+          "minutes": 45
+        },
+        {
+          "name": "I-280",
+          "minutes": 50
+        }
+      ],
+      "traffic_notes": "Heavy traffic during commute hours. I-280 is often less congested than US-101."
+    },
+    {
+      "origin": "Sunnyvale",
+      "destination": "Happy Hollow Zoo",
+      "driving_minutes": 25,
+      "driving_distance_miles": 16.5,
+      "routes": [
+        {
+          "name": "US-101",
+          "minutes": 25
+        },
+        {
+          "name": "CA-87",
+          "minutes": 30
+        }
+      ],
+      "traffic_notes": "Traffic is typically lighter on weekends when most families visit."
+    },
+    {
+      "origin": "Sunnyvale",
+      "destination": "Palo Alto Junior Museum & Zoo",
+      "driving_minutes": 18,
+      "driving_distance_miles": 8.7,
+      "routes": [
+        {
+          "name": "US-101",
+          "minutes": 18
+        },
+        {
+          "name": "Middlefield Rd",
+          "minutes": 22
+        }
+      ],
+      "traffic_notes": "Parking can be limited near the museum on weekends."
+    },
+    {
+      "origin": "Sunnyvale",
+      "destination": "Seven Seas Park",
+      "driving_minutes": 10,
+      "driving_distance_miles": 2.8,
+      "routes": [
+        {
+          "name": "Mathilda Ave and Morse Ave",
+          "minutes": 10
+        }
+      ],
+      "traffic_notes": "Quick local drive with minimal traffic issues."
+    },
+    {
+      "origin": "Sunnyvale",
+      "destination": "Stanford Shopping Center",
+      "driving_minutes": 20,
+      "driving_distance_miles": 9.8,
+      "routes": [
+        {
+          "name": "US-101",
+          "minutes": 20
+        },
+        {
+          "name": "El Camino Real",
+          "minutes": 25
+        }
+      ],
+      "traffic_notes": "Busy on weekends and during holiday shopping seasons. El Camino has many lights but can be more reliable during heavy traffic."
+    },
+    {
+      "origin": "Sunnyvale",
+      "destination": "Mr. Bao",
+      "driving_minutes": 15,
+      "driving_distance_miles": 6.5,
+      "routes": [
+        {
+          "name": "Central Expressway",
+          "minutes": 15
+        }
+      ],
+      "traffic_notes": "Street parking can be difficult during dinner hours."
+    }
+  ]
+}

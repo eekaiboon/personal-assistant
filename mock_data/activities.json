@@ -1,0 +1,262 @@
+{
+  "activities": [
+    {
+      "name": "Happy Hollow Zoo",
+      "description": "A 16-acre zoo and amusement park with rides and animals specifically designed for young children.",
+      "location": "San Jose, CA",
+      "address": "1300 Senter Rd, San Jose, CA 95112",
+      "indoor": false,
+      "age_min": 1,
+      "age_max": 8,
+      "duration_minutes": 180,
+      "cost": "$$",
+      "website": "https://www.happyhollow.org/",
+      "exhibits": [
+        "Danny the Dragon Ride", 
+        "Petting Zoo", 
+        "Fossa Habitat", 
+        "Lemur Woods"
+      ],
+      "tips": "Visit early in the day to avoid crowds. The petting zoo is perfect for toddlers.",
+      "suitable_for_toddlers": true
+    },
+    {
+      "name": "Palo Alto Junior Museum & Zoo",
+      "description": "A small museum and zoo with interactive science exhibits and over 50 species of animals.",
+      "location": "Palo Alto, CA",
+      "address": "1451 Middlefield Rd, Palo Alto, CA 94301",
+      "indoor": true,
+      "age_min": 1,
+      "age_max": 10,
+      "duration_minutes": 120,
+      "cost": "$",
+      "website": "https://www.cityofpaloalto.org/Departments/Community-Services/Arts-Sciences/Junior-Museum-Zoo",
+      "exhibits": [
+        "Bobcat Exhibit", 
+        "Interactive Physics Exhibit", 
+        "Raccoon Habitat", 
+        "Geology Room"
+      ],
+      "tips": "The museum is designed with toddlers in mind, with plenty of hands-on exhibits.",
+      "suitable_for_toddlers": true
+    },
+    {
+      "name": "Seven Seas Park",
+      "description": "A family-friendly park with nautical-themed playground equipment and plenty of green space.",
+      "location": "Sunnyvale, CA",
+      "address": "1010 Morse Ave, Sunnyvale, CA 94089",
+      "indoor": false,
+      "age_min": 1,
+      "age_max": 12,
+      "duration_minutes": 90,
+      "cost": "Free",
+      "facilities": [
+        "Toddler Play Area", 
+        "Swings", 
+        "Slides", 
+        "Picnic Tables", 
+        "Restrooms"
+      ],
+      "tips": "The play structures are separated by age group, making it easy to find age-appropriate areas.",
+      "suitable_for_toddlers": true
+    },
+    {
+      "name": "Old Fremont Preserve Hiking",
+      "description": "Scenic hiking trails through grasslands and oak woodlands with views of the Bay Area.",
+      "location": "Cupertino, CA",
+      "address": "Old Fremont Preserve, Cupertino, CA",
+      "indoor": false,
+      "age_min": 2,
+      "age_max": 99,
+      "duration_minutes": 120,
+      "cost": "Free",
+      "trails": [
+        {
+          "name": "Toddler Trail",
+          "length_miles": 0.5,
+          "difficulty": "Easy",
+          "stroller_friendly": true
+        },
+        {
+          "name": "Family Loop",
+          "length_miles": 1.2,
+          "difficulty": "Easy-Moderate",
+          "stroller_friendly": false
+        }
+      ],
+      "tips": "The Toddler Trail is perfect for young children. Bring plenty of water and sun protection.",
+      "suitable_for_toddlers": true
+    },
+    {
+      "name": "Villa Montalvo Hiking",
+      "description": "Beautiful gardens and hiking trails on the grounds of a historic villa.",
+      "location": "Saratoga, CA",
+      "address": "15400 Montalvo Rd, Saratoga, CA 95070",
+      "indoor": false,
+      "age_min": 2,
+      "age_max": 99,
+      "duration_minutes": 150,
+      "cost": "Free",
+      "trails": [
+        {
+          "name": "Garden Path",
+          "length_miles": 0.3,
+          "difficulty": "Easy",
+          "stroller_friendly": true
+        },
+        {
+          "name": "Lookout Trail",
+          "length_miles": 1.8,
+          "difficulty": "Moderate",
+          "stroller_friendly": false
+        }
+      ],
+      "tips": "The garden paths are perfect for young children. The villa occasionally hosts family-friendly events.",
+      "suitable_for_toddlers": true
+    },
+    {
+      "name": "Stanford Shopping Center",
+      "description": "Upscale outdoor shopping mall with gardens, play areas, and family-friendly dining.",
+      "location": "Palo Alto, CA",
+      "address": "660 Stanford Shopping Center, Palo Alto, CA 94304",
+      "indoor": true,
+      "age_min": 0,
+      "age_max": 99,
+      "duration_minutes": 180,
+      "cost": "$$-$$$",
+      "attractions": [
+        "Children's Play Area",
+        "Duck Pond",
+        "Gardens",
+        "California Pizza Kitchen (kid-friendly)",
+        "Toy Store"
+      ],
+      "tips": "The children's play area is perfect for short breaks while shopping. Many restaurants offer kid-friendly options.",
+      "suitable_for_toddlers": true
+    },
+    {
+      "name": "CuriOdyssey",
+      "description": "Science and wildlife center with animal exhibits and interactive science experiments.",
+      "location": "San Mateo, CA",
+      "address": "1651 Coyote Point Dr, San Mateo, CA 94401",
+      "indoor": true,
+      "age_min": 1,
+      "age_max": 12,
+      "duration_minutes": 150,
+      "cost": "$$",
+      "website": "https://curiodyssey.org/",
+      "exhibits": [
+        "Animal Habitats", 
+        "Wildlife Encounters", 
+        "Interactive Science Exhibits", 
+        "Outdoor Playground"
+      ],
+      "tips": "Check the schedule for animal feeding times, which are fascinating for young children.",
+      "suitable_for_toddlers": true
+    },
+    {
+      "name": "Children's Discovery Museum of San Jose",
+      "description": "Interactive children's museum with hands-on exhibits covering art, science, and more.",
+      "location": "San Jose, CA",
+      "address": "180 Woz Way, San Jose, CA 95110",
+      "indoor": true,
+      "age_min": 1,
+      "age_max": 10,
+      "duration_minutes": 180,
+      "cost": "$$",
+      "website": "https://www.cdm.org/",
+      "exhibits": [
+        "Water Play Area", 
+        "Bubbles", 
+        "Art Loft", 
+        "Wonder Cabinet for toddlers", 
+        "Outdoor Garden"
+      ],
+      "tips": "The Wonder Cabinet area is designed specifically for children under 4. Bring a change of clothes for the water play area.",
+      "suitable_for_toddlers": true
+    },
+    {
+      "name": "Emma Prusch Farm Park",
+      "description": "Urban farm park with fruit orchards, a small animal farm, and playgrounds.",
+      "location": "San Jose, CA",
+      "address": "647 S King Rd, San Jose, CA 95116",
+      "indoor": false,
+      "age_min": 1,
+      "age_max": 12,
+      "duration_minutes": 120,
+      "cost": "Free",
+      "attractions": [
+        "Small Animal Farm", 
+        "Playground", 
+        "Picnic Areas", 
+        "Community Garden", 
+        "Fruit Orchards"
+      ],
+      "tips": "The animal area is perfect for toddlers, with friendly goats and other farm animals.",
+      "suitable_for_toddlers": true
+    },
+    {
+      "name": "Baylands Nature Preserve",
+      "description": "Wetlands preserve with boardwalks, bird watching, and easy walking trails.",
+      "location": "Palo Alto, CA",
+      "address": "2500 Embarcadero Rd, Palo Alto, CA 94303",
+      "indoor": false,
+      "age_min": 1,
+      "age_max": 99,
+      "duration_minutes": 120,
+      "cost": "Free",
+      "trails": [
+        {
+          "name": "Marsh Front Loop",
+          "length_miles": 0.8,
+          "difficulty": "Easy",
+          "stroller_friendly": true
+        },
+        {
+          "name": "Duck Pond Trail",
+          "length_miles": 0.5,
+          "difficulty": "Easy",
+          "stroller_friendly": true
+        }
+      ],
+      "tips": "Great for bird watching. The boardwalk trails are stroller-friendly and perfect for toddlers to explore.",
+      "suitable_for_toddlers": true
+    },
+    {
+      "name": "Raging Waters San Jose",
+      "description": "Large water park with slides, wave pools, and kids' areas - perfect for summer fun.",
+      "location": "San Jose, CA",
+      "address": "2333 S White Rd, San Jose, CA 95148",
+      "indoor": false,
+      "age_min": 2,
+      "age_max": 99,
+      "duration_minutes": 300,
+      "cost": "$$$",
+      "website": "https://www.ragingwaters.com/",
+      "attractions": [
+        "Kiddie Pool Area", 
+        "Lazy River", 
+        "Water Slides", 
+        "Wave Pool", 
+        "Family Raft Rides"
+      ],
+      "seasonal": "Summer only",
+      "tips": "The 'Little Dipper' area is perfect for toddlers. Go early to get good spots for your belongings.",
+      "suitable_for_toddlers": true
+    },
+    {
+      "name": "Story Time at Sunnyvale Library",
+      "description": "Weekly interactive story time session for toddlers and young children.",
+      "location": "Sunnyvale, CA",
+      "address": "665 W Olive Ave, Sunnyvale, CA 94086",
+      "indoor": true,
+      "age_min": 1,
+      "age_max": 5,
+      "duration_minutes": 45,
+      "cost": "Free",
+      "schedule": "Tuesdays and Thursdays at 10:30 AM",
+      "tips": "Arrive a bit early to get a good spot. Sessions include songs and movement activities perfect for toddlers.",
+      "suitable_for_toddlers": true
+    }
+  ]
+}

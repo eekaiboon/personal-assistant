@@ -1,0 +1,370 @@
+{
+  "recipes": [
+    {
+      "name": "Sesame Noodles with Cucumber",
+      "cuisine": "Chinese",
+      "meal_type": "lunch, dinner",
+      "description": "Cold noodles with a savory sesame sauce and fresh cucumber - perfect for warm days.",
+      "prep_time": 15,
+      "cook_time": 10,
+      "servings": 4,
+      "ingredients": [
+        "12 oz Chinese egg noodles or spaghetti",
+        "2 tablespoons sesame oil",
+        "3 tablespoons soy sauce",
+        "2 tablespoons rice vinegar",
+        "1 tablespoon peanut butter",
+        "1 tablespoon tahini (sesame paste)",
+        "1 tablespoon brown sugar",
+        "2 cloves garlic, minced",
+        "1 teaspoon ginger, grated",
+        "1 cucumber, julienned",
+        "2 green onions, thinly sliced",
+        "1 tablespoon toasted sesame seeds"
+      ],
+      "instructions": [
+        "Cook noodles according to package directions. Rinse under cold water and drain.",
+        "In a bowl, whisk together sesame oil, soy sauce, rice vinegar, peanut butter, tahini, brown sugar, garlic, and ginger until smooth.",
+        "Toss noodles with sauce until well coated.",
+        "Top with julienned cucumber, sliced green onions, and toasted sesame seeds.",
+        "Serve cold or at room temperature."
+      ],
+      "notes": "Can be made ahead and refrigerated. Perfect for meal prep.",
+      "kid_friendly": true,
+      "favorite": true
+    },
+    {
+      "name": "Korean Bibimbap",
+      "cuisine": "Korean",
+      "meal_type": "lunch, dinner",
+      "description": "A colorful rice bowl topped with various vegetables, protein, and a spicy gochujang sauce.",
+      "prep_time": 30,
+      "cook_time": 20,
+      "servings": 4,
+      "ingredients": [
+        "2 cups short-grain rice, cooked",
+        "1 lb ground beef or thinly sliced beef",
+        "2 tablespoons soy sauce",
+        "1 tablespoon sesame oil",
+        "2 teaspoons brown sugar",
+        "2 cloves garlic, minced",
+        "1 cup spinach, blanched and seasoned",
+        "1 cup bean sprouts, blanched and seasoned",
+        "1 carrot, julienned and sautéed",
+        "1 zucchini, julienned and sautéed",
+        "4 eggs, fried sunny-side up",
+        "4 tablespoons gochujang (Korean chili paste)",
+        "Sesame seeds for garnish"
+      ],
+      "instructions": [
+        "Marinate beef in soy sauce, sesame oil, brown sugar, and garlic for 15 minutes.",
+        "Cook each vegetable separately: blanch spinach and bean sprouts, sauté carrots and zucchini.",
+        "Cook marinated beef until browned and cooked through.",
+        "Fry eggs sunny-side up.",
+        "Assemble bowls: rice on the bottom, arranged sections of vegetables and beef, topped with fried egg.",
+        "Serve with gochujang sauce on the side to mix in as desired."
+      ],
+      "notes": "Can make components ahead of time and assemble when ready to eat.",
+      "kid_friendly": false,
+      "spicy": true
+    },
+    {
+      "name": "Simple Chicken Ramen",
+      "cuisine": "Japanese",
+      "meal_type": "lunch, dinner",
+      "description": "A quick homemade ramen with chicken, vegetables, and a flavorful broth.",
+      "prep_time": 15,
+      "cook_time": 20,
+      "servings": 4,
+      "ingredients": [
+        "8 cups chicken broth",
+        "2 tablespoons soy sauce",
+        "2 cloves garlic, minced",
+        "1-inch piece ginger, sliced",
+        "2 tablespoons mirin",
+        "2 boneless, skinless chicken breasts",
+        "8 oz ramen noodles",
+        "2 cups baby spinach",
+        "2 carrots, julienned",
+        "4 green onions, sliced",
+        "4 soft-boiled eggs, halved",
+        "Sesame seeds and chili oil for garnish"
+      ],
+      "instructions": [
+        "In a large pot, combine broth, soy sauce, garlic, ginger, and mirin. Bring to a simmer.",
+        "Add chicken breasts to the broth and simmer until cooked through, about 15 minutes.",
+        "Remove chicken, shred it, and set aside.",
+        "Cook ramen noodles according to package directions.",
+        "Divide noodles among four bowls, top with shredded chicken, spinach, carrots, and green onions.",
+        "Ladle hot broth over the ingredients.",
+        "Top each bowl with a halved soft-boiled egg, sesame seeds, and a drizzle of chili oil if desired."
+      ],
+      "notes": "For kids, use less or no chili oil.",
+      "kid_friendly": true
+    },
+    {
+      "name": "Chinese Scallion Pancakes",
+      "cuisine": "Chinese",
+      "meal_type": "appetizer, snack",
+      "description": "Flaky, savory pancakes filled with green onions - a perfect snack or appetizer.",
+      "prep_time": 30,
+      "cook_time": 15,
+      "servings": 4,
+      "ingredients": [
+        "2 cups all-purpose flour",
+        "1 cup hot water",
+        "1/4 cup vegetable oil, plus more for cooking",
+        "1 teaspoon salt",
+        "1 bunch scallions (green onions), finely chopped",
+        "Dipping sauce: 2 tablespoons soy sauce, 1 tablespoon rice vinegar, 1 teaspoon sesame oil, pinch of sugar"
+      ],
+      "instructions": [
+        "Mix flour and salt in a bowl. Slowly add hot water while stirring until a dough forms.",
+        "Knead the dough for 5 minutes until smooth. Cover and rest for 30 minutes.",
+        "Divide dough into 4 equal pieces. Roll each piece into a thin circle.",
+        "Brush each circle with oil and sprinkle with chopped scallions.",
+        "Roll up each circle like a jelly roll, then coil it into a spiral. Flatten spiral with rolling pin.",
+        "Heat oil in a skillet and cook each pancake until golden brown on both sides, about 2-3 minutes per side.",
+        "Cut into wedges and serve with dipping sauce."
+      ],
+      "notes": "Can be frozen before cooking for later use.",
+      "kid_friendly": true
+    },
+    {
+      "name": "Korean Kimchi Fried Rice",
+      "cuisine": "Korean",
+      "meal_type": "lunch, dinner",
+      "description": "A spicy, flavorful fried rice made with kimchi, perfect for using leftover rice.",
+      "prep_time": 10,
+      "cook_time": 15,
+      "servings": 2,
+      "ingredients": [
+        "2 cups day-old cooked rice",
+        "1 cup kimchi, chopped",
+        "2 tablespoons kimchi juice",
+        "1/4 cup ground pork or bacon (optional)",
+        "1 tablespoon vegetable oil",
+        "1 tablespoon sesame oil",
+        "2 green onions, sliced",
+        "2 eggs",
+        "1 tablespoon soy sauce",
+        "Sesame seeds for garnish"
+      ],
+      "instructions": [
+        "Heat vegetable oil in a large skillet or wok over medium-high heat.",
+        "If using meat, cook it first until browned.",
+        "Add kimchi and stir-fry for 1-2 minutes until fragrant.",
+        "Add rice, kimchi juice, and soy sauce. Stir-fry, breaking up any clumps of rice.",
+        "Push rice mixture to one side and crack eggs into the empty side. Scramble eggs, then mix into rice.",
+        "Stir in sesame oil and green onions.",
+        "Serve hot, garnished with additional green onions and sesame seeds."
+      ],
+      "notes": "Adjust kimchi amount based on spice preference.",
+      "kid_friendly": false,
+      "spicy": true
+    },
+    {
+      "name": "Japanese Onigiri (Rice Balls)",
+      "cuisine": "Japanese",
+      "meal_type": "snack, lunch",
+      "description": "Handheld rice balls with various fillings, perfect for lunch boxes or quick snacks.",
+      "prep_time": 20,
+      "cook_time": 0,
+      "servings": 6,
+      "ingredients": [
+        "3 cups cooked short-grain Japanese rice",
+        "1 teaspoon salt",
+        "Fillings options: canned tuna mixed with mayo, pickled plum (umeboshi), grilled salmon flakes",
+        "2 sheets nori seaweed, cut into strips",
+        "1 tablespoon sesame seeds (optional)"
+      ],
+      "instructions": [
+        "Wet your hands and sprinkle with a little salt to prevent sticking.",
+        "Place about 1/3 cup of rice in your palm and create a small indentation.",
+        "Add 1 teaspoon of your chosen filling in the indentation.",
+        "Cover the filling with a little more rice and shape into a triangle or ball.",
+        "Wrap the bottom of the onigiri with a strip of nori.",
+        "Sprinkle with sesame seeds if desired."
+      ],
+      "notes": "Great for meal prep and lunch boxes. Can be customized with different fillings.",
+      "kid_friendly": true
+    },
+    {
+      "name": "Chinese Tomato Egg Stir-Fry",
+      "cuisine": "Chinese",
+      "meal_type": "lunch, dinner",
+      "description": "A simple, comforting dish of fluffy eggs stir-fried with sweet tomatoes.",
+      "prep_time": 5,
+      "cook_time": 10,
+      "servings": 2,
+      "ingredients": [
+        "4 eggs",
+        "3 ripe tomatoes, cut into wedges",
+        "2 green onions, sliced",
+        "1 tablespoon vegetable oil",
+        "1/2 teaspoon sugar",
+        "1/2 teaspoon salt",
+        "1 teaspoon sesame oil",
+        "1 tablespoon ketchup (optional, for added sweetness)"
+      ],
+      "instructions": [
+        "Beat eggs with a pinch of salt.",
+        "Heat oil in a wok or skillet over medium-high heat.",
+        "Add eggs and scramble until just set but still moist. Remove from wok.",
+        "In the same wok, add tomatoes, sugar, and salt. Cook until tomatoes soften and release juices, about 2 minutes.",
+        "Return eggs to the wok and gently combine with tomatoes.",
+        "Add green onions and sesame oil. Stir briefly.",
+        "Serve hot with steamed rice."
+      ],
+      "notes": "A quick, nutritious meal that comes together in minutes. Very authentic Chinese home cooking.",
+      "kid_friendly": true
+    },
+    {
+      "name": "Korean Japchae (Glass Noodle Stir-Fry)",
+      "cuisine": "Korean",
+      "meal_type": "lunch, dinner",
+      "description": "Sweet potato glass noodles stir-fried with vegetables and meat in a savory sauce.",
+      "prep_time": 20,
+      "cook_time": 15,
+      "servings": 4,
+      "ingredients": [
+        "8 oz sweet potato starch noodles (dangmyeon)",
+        "1/2 lb beef sirloin, thinly sliced (optional)",
+        "1 carrot, julienned",
+        "1 bell pepper, julienned",
+        "1 small onion, thinly sliced",
+        "2 cups spinach, blanched and squeezed dry",
+        "3 cloves garlic, minced",
+        "3 tablespoons soy sauce",
+        "2 tablespoons sugar",
+        "2 tablespoons sesame oil",
+        "2 tablespoons vegetable oil",
+        "Sesame seeds for garnish"
+      ],
+      "instructions": [
+        "Cook noodles according to package directions. Drain, rinse with cold water, and toss with 1 tablespoon sesame oil.",
+        "If using beef, marinate with 1 tablespoon soy sauce, 1 teaspoon sugar, and 1 teaspoon sesame oil for 15 minutes.",
+        "Heat vegetable oil in a large skillet or wok. Stir-fry beef until cooked through, then remove from pan.",
+        "In the same pan, stir-fry onion, carrot, and bell pepper until softened.",
+        "Add garlic and cook until fragrant.",
+        "Add noodles, remaining soy sauce, sugar, and sesame oil. Toss to combine.",
+        "Add beef back to the pan along with blanched spinach. Toss everything together.",
+        "Garnish with sesame seeds before serving."
+      ],
+      "notes": "Can be served hot or at room temperature. Great for parties.",
+      "kid_friendly": true
+    },
+    {
+      "name": "Japanese Miso Soup",
+      "cuisine": "Japanese",
+      "meal_type": "appetizer, side",
+      "description": "A simple, comforting soup made with miso paste, tofu, and seaweed.",
+      "prep_time": 5,
+      "cook_time": 10,
+      "servings": 4,
+      "ingredients": [
+        "4 cups dashi stock (or water with dashi powder)",
+        "3-4 tablespoons miso paste (white or red)",
+        "1/4 cup firm tofu, cubed",
+        "2 tablespoons dried wakame seaweed",
+        "2 green onions, thinly sliced"
+      ],
+      "instructions": [
+        "Soak wakame in cold water for 5 minutes until reconstituted, then drain.",
+        "Bring dashi stock to a gentle simmer (do not boil).",
+        "Place miso paste in a small bowl and add a ladle of hot dashi. Whisk until smooth.",
+        "Add miso mixture back to the pot and stir gently.",
+        "Add tofu cubes and wakame. Simmer for 1 minute (do not boil after adding miso).",
+        "Ladle into bowls and garnish with green onions."
+      ],
+      "notes": "Miso soup is traditionally served as a side dish with Japanese meals. Never boil miso as it destroys beneficial probiotics.",
+      "kid_friendly": true
+    },
+    {
+      "name": "Chinese Congee (Rice Porridge)",
+      "cuisine": "Chinese",
+      "meal_type": "breakfast, lunch",
+      "description": "A comforting rice porridge that's easy to digest and can be topped with various ingredients.",
+      "prep_time": 5,
+      "cook_time": 60,
+      "servings": 4,
+      "ingredients": [
+        "1 cup white rice, rinsed",
+        "8 cups chicken or vegetable broth (or water)",
+        "1-inch piece ginger, sliced",
+        "1 teaspoon salt",
+        "Toppings (optional): sliced green onions, cilantro, shredded chicken, century egg, fried garlic, soy sauce"
+      ],
+      "instructions": [
+        "Combine rice, broth, ginger, and salt in a large pot.",
+        "Bring to a boil, then reduce heat to low.",
+        "Simmer uncovered for about 1 hour, stirring occasionally, until rice has broken down and congee is creamy.",
+        "Add more water if needed to achieve desired consistency.",
+        "Season to taste and serve hot with desired toppings."
+      ],
+      "notes": "Perfect for when you're feeling under the weather. Can be made in a slow cooker overnight.",
+      "kid_friendly": true
+    },
+    {
+      "name": "Korean Kimchi Pancakes (Kimchijeon)",
+      "cuisine": "Korean",
+      "meal_type": "appetizer, snack",
+      "description": "Crispy, savory pancakes made with fermented kimchi and a simple batter.",
+      "prep_time": 10,
+      "cook_time": 15,
+      "servings": 4,
+      "ingredients": [
+        "1 cup kimchi, chopped",
+        "2 tablespoons kimchi juice",
+        "1 cup all-purpose flour",
+        "1/2 cup water",
+        "2 green onions, sliced",
+        "1 egg",
+        "1/2 teaspoon salt",
+        "Vegetable oil for frying",
+        "Dipping sauce: 2 tablespoons soy sauce, 1 tablespoon rice vinegar, 1 teaspoon sesame oil"
+      ],
+      "instructions": [
+        "In a bowl, mix flour, water, egg, kimchi juice, and salt until smooth.",
+        "Fold in chopped kimchi and green onions.",
+        "Heat oil in a skillet over medium heat.",
+        "Pour about 1/4 cup of batter into the pan and spread into a thin circle.",
+        "Cook until golden brown on the bottom, about 3-4 minutes.",
+        "Flip and cook the other side until crispy, about 2-3 more minutes.",
+        "Repeat with remaining batter.",
+        "Serve hot with dipping sauce."
+      ],
+      "notes": "The pancakes are crispier if the batter is not too thick. Add a little more water if needed.",
+      "kid_friendly": false,
+      "spicy": true
+    },
+    {
+      "name": "Chinese Steamed Egg Custard",
+      "cuisine": "Chinese",
+      "meal_type": "side, breakfast",
+      "description": "A delicate, silky egg custard that's steamed to perfection.",
+      "prep_time": 5,
+      "cook_time": 10,
+      "servings": 2,
+      "ingredients": [
+        "3 eggs",
+        "3/4 cup warm water or chicken broth",
+        "1/4 teaspoon salt",
+        "1/2 teaspoon sesame oil",
+        "1 green onion, finely chopped",
+        "1 teaspoon soy sauce"
+      ],
+      "instructions": [
+        "Beat eggs with salt until just mixed (don't over-beat).",
+        "Slowly stir in warm water or broth (the liquid should be warm, not hot).",
+        "Strain the mixture through a fine sieve into a heatproof bowl.",
+        "Cover the bowl with plastic wrap or aluminum foil.",
+        "Set up a steamer and bring water to a boil, then reduce to a simmer.",
+        "Place the bowl in the steamer and steam for about 10 minutes until set but still jiggly in the center.",
+        "Drizzle with sesame oil and soy sauce, and garnish with green onions before serving."
+      ],
+      "notes": "For the silkiest texture, make sure to steam over low heat. Excellent for children and easy to digest.",
+      "kid_friendly": true
+    }
+  ]
+}

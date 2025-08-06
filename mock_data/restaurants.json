@@ -1,0 +1,368 @@
+{
+  "restaurants": [
+    {
+      "name": "Mr. Bao",
+      "cuisine": "Taiwanese",
+      "location": "Mountain View, CA",
+      "address": "180 Castro St, Mountain View, CA 94041",
+      "price_range": "$$",
+      "rating": 4.5,
+      "kid_friendly": true,
+      "signature_dishes": [
+        "Pork Belly Bao",
+        "Beef Noodle Soup",
+        "Taiwanese Popcorn Chicken"
+      ],
+      "hours": {
+        "Monday": "11:00 AM - 2:30 PM, 5:00 PM - 9:00 PM",
+        "Tuesday": "11:00 AM - 2:30 PM, 5:00 PM - 9:00 PM",
+        "Wednesday": "11:00 AM - 2:30 PM, 5:00 PM - 9:00 PM",
+        "Thursday": "11:00 AM - 2:30 PM, 5:00 PM - 9:00 PM",
+        "Friday": "11:00 AM - 2:30 PM, 5:00 PM - 9:30 PM",
+        "Saturday": "11:00 AM - 9:30 PM",
+        "Sunday": "11:00 AM - 9:00 PM"
+      },
+      "notes": "Popular spot that can get busy on weekends. Great for families.",
+      "favorite": true
+    },
+    {
+      "name": "Ramen Nagi",
+      "cuisine": "Japanese",
+      "location": "Palo Alto, CA",
+      "address": "541 Bryant St, Palo Alto, CA 94301",
+      "price_range": "$$",
+      "rating": 4.7,
+      "kid_friendly": true,
+      "signature_dishes": [
+        "Original Butao King Ramen",
+        "Red King Spicy Ramen",
+        "Black King Garlic Ramen"
+      ],
+      "hours": {
+        "Monday": "11:00 AM - 3:00 PM, 5:00 PM - 9:30 PM",
+        "Tuesday": "11:00 AM - 3:00 PM, 5:00 PM - 9:30 PM",
+        "Wednesday": "11:00 AM - 3:00 PM, 5:00 PM - 9:30 PM",
+        "Thursday": "11:00 AM - 3:00 PM, 5:00 PM - 9:30 PM",
+        "Friday": "11:00 AM - 3:00 PM, 5:00 PM - 10:00 PM",
+        "Saturday": "11:00 AM - 10:00 PM",
+        "Sunday": "11:00 AM - 9:30 PM"
+      },
+      "notes": "Often has a line, especially on weekends. You can customize the richness, spiciness, and firmness of your ramen.",
+      "favorite": true
+    },
+    {
+      "name": "Drunken Monk",
+      "cuisine": "Chinese, Sichuan",
+      "location": "Menlo Park, CA",
+      "address": "3130 Alpine Rd, Menlo Park, CA 94025",
+      "price_range": "$$",
+      "rating": 4.4,
+      "kid_friendly": false,
+      "signature_dishes": [
+        "Spicy Boiled Fish",
+        "Dan Dan Noodles",
+        "Mapo Tofu"
+      ],
+      "hours": {
+        "Monday": "11:00 AM - 2:30 PM, 5:00 PM - 9:00 PM",
+        "Tuesday": "11:00 AM - 2:30 PM, 5:00 PM - 9:00 PM",
+        "Wednesday": "11:00 AM - 2:30 PM, 5:00 PM - 9:00 PM",
+        "Thursday": "11:00 AM - 2:30 PM, 5:00 PM - 9:00 PM",
+        "Friday": "11:00 AM - 2:30 PM, 5:00 PM - 9:30 PM",
+        "Saturday": "11:00 AM - 9:30 PM",
+        "Sunday": "11:00 AM - 9:00 PM"
+      },
+      "notes": "Authentic Sichuan cuisine that can be very spicy. Ask for mild options if you don't like spicy food.",
+      "favorite": true
+    },
+    {
+      "name": "Ondam",
+      "cuisine": "Thai",
+      "location": "Santa Clara, CA",
+      "address": "1815 El Camino Real, Santa Clara, CA 95050",
+      "price_range": "$$",
+      "rating": 4.6,
+      "kid_friendly": true,
+      "signature_dishes": [
+        "Pad Thai",
+        "Green Curry",
+        "Tom Yum Soup"
+      ],
+      "hours": {
+        "Monday": "11:00 AM - 3:00 PM, 5:00 PM - 9:00 PM",
+        "Tuesday": "11:00 AM - 3:00 PM, 5:00 PM - 9:00 PM",
+        "Wednesday": "11:00 AM - 3:00 PM, 5:00 PM - 9:00 PM",
+        "Thursday": "11:00 AM - 3:00 PM, 5:00 PM - 9:00 PM",
+        "Friday": "11:00 AM - 3:00 PM, 5:00 PM - 10:00 PM",
+        "Saturday": "12:00 PM - 10:00 PM",
+        "Sunday": "12:00 PM - 9:00 PM"
+      },
+      "notes": "Fresh, flavorful Thai food with customizable spice levels. Good vegetarian options available.",
+      "favorite": true
+    },
+    {
+      "name": "Din Tai Fung",
+      "cuisine": "Taiwanese, Dim Sum",
+      "location": "Santa Clara, CA",
+      "address": "2855 Stevens Creek Blvd, Santa Clara, CA 95050",
+      "price_range": "$$$",
+      "rating": 4.5,
+      "kid_friendly": true,
+      "signature_dishes": [
+        "Xiao Long Bao (Soup Dumplings)",
+        "Spicy Wontons",
+        "Pork Chop Fried Rice"
+      ],
+      "hours": {
+        "Monday": "11:00 AM - 9:00 PM",
+        "Tuesday": "11:00 AM - 9:00 PM",
+        "Wednesday": "11:00 AM - 9:00 PM",
+        "Thursday": "11:00 AM - 9:00 PM",
+        "Friday": "11:00 AM - 10:00 PM",
+        "Saturday": "10:00 AM - 10:00 PM",
+        "Sunday": "10:00 AM - 9:00 PM"
+      },
+      "notes": "Famous for their soup dumplings. Often has a long wait, but you can join the waitlist remotely."
+    },
+    {
+      "name": "Sushi Sam's Edomata",
+      "cuisine": "Japanese, Sushi",
+      "location": "San Mateo, CA",
+      "address": "218 E 3rd Ave, San Mateo, CA 94401",
+      "price_range": "$$$",
+      "rating": 4.7,
+      "kid_friendly": true,
+      "signature_dishes": [
+        "Omakase (Chef's Selection)",
+        "Butterfish Nigiri",
+        "Salmon Toro"
+      ],
+      "hours": {
+        "Monday": "Closed",
+        "Tuesday": "11:30 AM - 1:45 PM, 5:00 PM - 8:45 PM",
+        "Wednesday": "11:30 AM - 1:45 PM, 5:00 PM - 8:45 PM",
+        "Thursday": "11:30 AM - 1:45 PM, 5:00 PM - 8:45 PM",
+        "Friday": "11:30 AM - 1:45 PM, 5:00 PM - 8:45 PM",
+        "Saturday": "5:00 PM - 8:45 PM",
+        "Sunday": "5:00 PM - 8:45 PM"
+      },
+      "notes": "High-quality, fresh sushi. Best to make reservations in advance."
+    },
+    {
+      "name": "Koi Palace",
+      "cuisine": "Chinese, Dim Sum",
+      "location": "Daly City, CA",
+      "address": "365 Gellert Blvd, Daly City, CA 94015",
+      "price_range": "$$$",
+      "rating": 4.2,
+      "kid_friendly": true,
+      "signature_dishes": [
+        "Har Gow (Shrimp Dumplings)",
+        "Siu Mai",
+        "BBQ Pork Buns"
+      ],
+      "hours": {
+        "Monday": "11:00 AM - 2:30 PM, 5:00 PM - 9:30 PM",
+        "Tuesday": "11:00 AM - 2:30 PM, 5:00 PM - 9:30 PM",
+        "Wednesday": "11:00 AM - 2:30 PM, 5:00 PM - 9:30 PM",
+        "Thursday": "11:00 AM - 2:30 PM, 5:00 PM - 9:30 PM",
+        "Friday": "11:00 AM - 2:30 PM, 5:00 PM - 10:00 PM",
+        "Saturday": "10:00 AM - 3:00 PM, 5:00 PM - 10:00 PM",
+        "Sunday": "10:00 AM - 3:00 PM, 5:00 PM - 9:30 PM"
+      },
+      "notes": "Famous dim sum restaurant. Expect a wait during weekend brunch hours."
+    },
+    {
+      "name": "Oren's Hummus",
+      "cuisine": "Middle Eastern, Israeli",
+      "location": "Palo Alto, CA",
+      "address": "261 University Ave, Palo Alto, CA 94301",
+      "price_range": "$$",
+      "rating": 4.5,
+      "kid_friendly": true,
+      "signature_dishes": [
+        "Hummus Plates",
+        "Chicken Skewers",
+        "Falafel"
+      ],
+      "hours": {
+        "Monday": "11:00 AM - 9:00 PM",
+        "Tuesday": "11:00 AM - 9:00 PM",
+        "Wednesday": "11:00 AM - 9:00 PM",
+        "Thursday": "11:00 AM - 9:00 PM",
+        "Friday": "11:00 AM - 10:00 PM",
+        "Saturday": "11:00 AM - 10:00 PM",
+        "Sunday": "11:00 AM - 9:00 PM"
+      },
+      "notes": "Great for families with a diverse menu that appeals to many tastes. Fresh ingredients and generous portions."
+    },
+    {
+      "name": "Tamari Korean BBQ",
+      "cuisine": "Korean",
+      "location": "Sunnyvale, CA",
+      "address": "607 S B St, San Mateo, CA 94401",
+      "price_range": "$$",
+      "rating": 4.3,
+      "kid_friendly": true,
+      "signature_dishes": [
+        "Beef Bulgogi",
+        "Kimchi Pancake",
+        "Tofu Soup"
+      ],
+      "hours": {
+        "Monday": "11:30 AM - 2:30 PM, 5:00 PM - 10:00 PM",
+        "Tuesday": "11:30 AM - 2:30 PM, 5:00 PM - 10:00 PM",
+        "Wednesday": "11:30 AM - 2:30 PM, 5:00 PM - 10:00 PM",
+        "Thursday": "11:30 AM - 2:30 PM, 5:00 PM - 10:00 PM",
+        "Friday": "11:30 AM - 2:30 PM, 5:00 PM - 10:30 PM",
+        "Saturday": "11:30 AM - 10:30 PM",
+        "Sunday": "11:30 AM - 10:00 PM"
+      },
+      "notes": "Good value for Korean BBQ. They offer both all-you-can-eat and à la carte options."
+    },
+    {
+      "name": "Shizen Vegan Sushi Bar",
+      "cuisine": "Japanese, Vegan",
+      "location": "San Francisco, CA",
+      "address": "370 14th St, San Francisco, CA 94103",
+      "price_range": "$$$",
+      "rating": 4.6,
+      "kid_friendly": true,
+      "signature_dishes": [
+        "Secret Weapon Roll",
+        "Mushroom Tempura",
+        "Vegan Ramen"
+      ],
+      "hours": {
+        "Monday": "5:30 PM - 10:00 PM",
+        "Tuesday": "5:30 PM - 10:00 PM",
+        "Wednesday": "5:30 PM - 10:00 PM",
+        "Thursday": "5:30 PM - 10:00 PM",
+        "Friday": "5:30 PM - 10:30 PM",
+        "Saturday": "5:30 PM - 10:30 PM",
+        "Sunday": "5:30 PM - 10:00 PM"
+      },
+      "notes": "Creative vegan sushi that even non-vegans love. No reservations, so expect a wait."
+    },
+    {
+      "name": "Fuki Sushi",
+      "cuisine": "Japanese",
+      "location": "Palo Alto, CA",
+      "address": "4119 El Camino Real, Palo Alto, CA 94306",
+      "price_range": "$$$",
+      "rating": 4.3,
+      "kid_friendly": true,
+      "signature_dishes": [
+        "Chef's Selection Sushi Platter",
+        "Chirashi Bowl",
+        "Tempura"
+      ],
+      "hours": {
+        "Monday": "11:30 AM - 2:00 PM, 5:00 PM - 8:30 PM",
+        "Tuesday": "11:30 AM - 2:00 PM, 5:00 PM - 8:30 PM",
+        "Wednesday": "11:30 AM - 2:00 PM, 5:00 PM - 8:30 PM",
+        "Thursday": "11:30 AM - 2:00 PM, 5:00 PM - 8:30 PM",
+        "Friday": "11:30 AM - 2:00 PM, 5:00 PM - 9:00 PM",
+        "Saturday": "11:30 AM - 2:00 PM, 5:00 PM - 9:00 PM",
+        "Sunday": "5:00 PM - 8:30 PM"
+      },
+      "notes": "One of the oldest Japanese restaurants in the area. Traditional and high-quality."
+    },
+    {
+      "name": "Hunan Home's Restaurant",
+      "cuisine": "Chinese, Hunan",
+      "location": "San Jose, CA",
+      "address": "1177 Saratoga Ave, San Jose, CA 95129",
+      "price_range": "$$",
+      "rating": 4.2,
+      "kid_friendly": true,
+      "signature_dishes": [
+        "General Tso's Chicken",
+        "Hunan Fish",
+        "Hot and Sour Soup"
+      ],
+      "hours": {
+        "Monday": "11:30 AM - 2:30 PM, 4:30 PM - 9:00 PM",
+        "Tuesday": "11:30 AM - 2:30 PM, 4:30 PM - 9:00 PM",
+        "Wednesday": "11:30 AM - 2:30 PM, 4:30 PM - 9:00 PM",
+        "Thursday": "11:30 AM - 2:30 PM, 4:30 PM - 9:00 PM",
+        "Friday": "11:30 AM - 2:30 PM, 4:30 PM - 9:30 PM",
+        "Saturday": "11:30 AM - 9:30 PM",
+        "Sunday": "11:30 AM - 9:00 PM"
+      },
+      "notes": "Family-friendly with large portions good for sharing. Many spicy options but they can adjust spice levels."
+    },
+    {
+      "name": "San Tung Chinese Restaurant",
+      "cuisine": "Chinese",
+      "location": "San Francisco, CA",
+      "address": "1031 Irving St, San Francisco, CA 94122",
+      "price_range": "$$",
+      "rating": 4.4,
+      "kid_friendly": true,
+      "signature_dishes": [
+        "Original Dry Fried Chicken Wings",
+        "Hand-pulled Noodles",
+        "Potstickers"
+      ],
+      "hours": {
+        "Monday": "Closed",
+        "Tuesday": "11:00 AM - 3:00 PM, 5:00 PM - 9:30 PM",
+        "Wednesday": "11:00 AM - 3:00 PM, 5:00 PM - 9:30 PM",
+        "Thursday": "11:00 AM - 3:00 PM, 5:00 PM - 9:30 PM",
+        "Friday": "11:00 AM - 3:00 PM, 5:00 PM - 9:30 PM",
+        "Saturday": "11:00 AM - 3:00 PM, 5:00 PM - 9:30 PM",
+        "Sunday": "11:00 AM - 3:00 PM, 5:00 PM - 9:30 PM"
+      },
+      "notes": "Famous for their dry fried chicken wings. Often has a wait, especially during peak hours."
+    },
+    {
+      "name": "Tomi Sushi",
+      "cuisine": "Japanese, Sushi",
+      "location": "Mountain View, CA",
+      "address": "192 Castro St, Mountain View, CA 94041",
+      "price_range": "$$",
+      "rating": 4.2,
+      "kid_friendly": true,
+      "signature_dishes": [
+        "Sashimi Platter",
+        "Dragon Roll",
+        "Bento Box"
+      ],
+      "hours": {
+        "Monday": "11:30 AM - 2:30 PM, 5:00 PM - 9:30 PM",
+        "Tuesday": "11:30 AM - 2:30 PM, 5:00 PM - 9:30 PM",
+        "Wednesday": "11:30 AM - 2:30 PM, 5:00 PM - 9:30 PM",
+        "Thursday": "11:30 AM - 2:30 PM, 5:00 PM - 9:30 PM",
+        "Friday": "11:30 AM - 2:30 PM, 5:00 PM - 10:00 PM",
+        "Saturday": "11:30 AM - 10:00 PM",
+        "Sunday": "11:30 AM - 9:30 PM"
+      },
+      "notes": "Good value for sushi in the area. They have both traditional and creative rolls."
+    },
+    {
+      "name": "Maru Ichi",
+      "cuisine": "Japanese, Ramen",
+      "location": "Mountain View, CA",
+      "address": "368 Castro St, Mountain View, CA 94041",
+      "price_range": "$$",
+      "rating": 4.1,
+      "kid_friendly": true,
+      "signature_dishes": [
+        "Kuro Ramen (Black Garlic Ramen)",
+        "Tonkotsu Ramen",
+        "Gyoza"
+      ],
+      "hours": {
+        "Monday": "11:30 AM - 2:00 PM, 5:30 PM - 9:00 PM",
+        "Tuesday": "11:30 AM - 2:00 PM, 5:30 PM - 9:00 PM",
+        "Wednesday": "11:30 AM - 2:00 PM, 5:30 PM - 9:00 PM",
+        "Thursday": "11:30 AM - 2:00 PM, 5:30 PM - 9:00 PM",
+        "Friday": "11:30 AM - 2:00 PM, 5:30 PM - 9:30 PM",
+        "Saturday": "11:30 AM - 9:30 PM",
+        "Sunday": "11:30 AM - 9:00 PM"
+      },
+      "notes": "Known for their unique black garlic ramen. The restaurant is small so it can fill up quickly."
+    }
+  ]
+}
