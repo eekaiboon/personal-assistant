@@ -4,9 +4,8 @@ This agent orchestrates the other specialist agents, routes requests,
 and synthesizes results into cohesive responses for the user.
 """
 
-import json
 import os
-import asyncio
+import json
 import logging
 from typing import Dict, Any, List, Optional, Tuple, Union
 from pydantic import BaseModel, Field
@@ -107,25 +106,46 @@ async def create_plan_impl(planner_agent, query: str, activity_results: Optional
     """Create a comprehensive plan using the Planner Agent."""
     try:
         if any([activity_results, culinary_results, foodie_results]):
+            # Create planner input with the user query and any specialist agent results
             planner_input = {
-                "user_question": query,
-                "activity_results": activity_results,
-                "culinary_results": culinary_results,
-                "foodie_results": foodie_results
+                "user_question": query
             }
             
-            result = await run_planner_agent(json.dumps(planner_input), planner_agent, event_handler=event_handler)
+            # Add specialist agent results if they exist
+            if activity_results is not None:
+                planner_input["activity_results"] = activity_results
+                
+            if culinary_results is not None:
+                planner_input["culinary_results"] = culinary_results
+                
+            if foodie_results is not None:
+                planner_input["foodie_results"] = foodie_results
+            
+            # Log and serialize the input for the planner
+            logger.debug("Preparing planner input with specialist results")
+            try:
+                json_input = json.dumps(planner_input)
+                logger.debug("Successfully serialized planner input to JSON")
+                result = await run_planner_agent(json_input, planner_agent, event_handler=event_handler)
+            except Exception as json_error:
+                # If we can't serialize the input, fall back to just the query
+                logger.error(f"JSON serialization error: {str(json_error)}")
+                result = await run_planner_agent(query, planner_agent, event_handler=event_handler)
         else:
             # Direct query to the planner
+            logger.debug("No specialist agent results, sending direct query to planner")
             result = await run_planner_agent(query, planner_agent, event_handler=event_handler)
-        
-        # Note: run_planner_agent already handles logging
         
         return result
     except Exception as e:
         error_msg = f"Error in Planner Agent: {str(e)}"
         logger.error(f"{error_msg}")
-        return {"error": error_msg}
+        # Return a clean error response
+        return {
+            "error": error_msg,
+            "content": "I apologize, but I encountered a technical issue while creating your plan.",
+            "agent": "Planner Agent"
+        }
 
 def build_coordinator_agent(activity_agent, culinary_agent, foodie_agent, planner_agent, 
                            model: str = "gpt-4",
@@ -204,18 +224,112 @@ def build_coordinator_agent(activity_agent, culinary_agent, foodie_agent, planne
             foodie_results: Results from the Foodie Agent as JSON string (optional)
         """
         # Parse JSON strings to dictionaries if provided
-        activity_dict = json.loads(activity_results) if activity_results else None
-        culinary_dict = json.loads(culinary_results) if culinary_results else None
-        foodie_dict = json.loads(foodie_results) if foodie_results else None
+        # Process input parameters
         
-        result = await create_plan_impl(
-            planner_agent,
-            query,
-            activity_dict,
-            culinary_dict,
-            foodie_dict,
-            event_handler=event_handler
-        )
+        # Extract JSON data from agent results
+        # Now that we've updated the system prompts, agents should return properly formatted JSON
+        # We'll keep minimal error handling for robustness
+        activity_dict = None
+        culinary_dict = None
+        foodie_dict = None
+        
+        # Process activity results
+        if activity_results:
+            try:
+                # First try direct JSON parsing
+                activity_dict = json.loads(activity_results)
+                # Successfully parsed activity results
+            except json.JSONDecodeError as e:
+                # Extract JSON using regex as a fallback if the direct parse fails
+                logger.error(f"Failed to parse activity_results JSON: {e}")
+                import re
+                json_pattern = r'\{\s*"activities"\s*:\s*\[.*?\]\s*\}'
+                json_matches = re.search(json_pattern, activity_results, re.DOTALL)
+                if json_matches:
+                    try:
+                        activity_dict = json.loads(json_matches.group(0))
+                        logger.debug("Successfully extracted and parsed activities JSON using regex")
+                    except json.JSONDecodeError:
+                        # If still fails, use the content as-is
+                        activity_dict = {"content": activity_results}
+                        logger.debug("Using activity_results as raw content after all parsing failed")
+                else:
+                    activity_dict = {"content": activity_results}
+                    logger.debug("Using activity_results as raw content - no JSON found")
+        
+        # Process culinary results
+        if culinary_results:
+            try:
+                culinary_dict = json.loads(culinary_results)
+                # Successfully parsed culinary results
+            except json.JSONDecodeError as e:
+                logger.error(f"Failed to parse culinary_results JSON: {e}")
+                import re
+                json_pattern = r'\{\s*"recipes"\s*:\s*\[.*?\]\s*\}'
+                json_matches = re.search(json_pattern, culinary_results, re.DOTALL)
+                if json_matches:
+                    try:
+                        culinary_dict = json.loads(json_matches.group(0))
+                        logger.debug("Successfully extracted and parsed recipes JSON using regex")
+                    except json.JSONDecodeError:
+                        culinary_dict = {"content": culinary_results}
+                        logger.debug("Using culinary_results as raw content after all parsing failed")
+                else:
+                    culinary_dict = {"content": culinary_results}
+                    logger.debug("Using culinary_results as raw content - no JSON found")
+        
+        # Process foodie results
+        if foodie_results:
+            try:
+                foodie_dict = json.loads(foodie_results)
+                # Successfully parsed foodie results
+            except json.JSONDecodeError as e:
+                logger.error(f"Failed to parse foodie_results JSON: {e}")
+                import re
+                json_pattern = r'\{\s*"restaurants"\s*:\s*\[.*?\]\s*\}'
+                json_matches = re.search(json_pattern, foodie_results, re.DOTALL)
+                if json_matches:
+                    try:
+                        foodie_dict = json.loads(json_matches.group(0))
+                        logger.debug("Successfully extracted and parsed restaurants JSON using regex")
+                    except json.JSONDecodeError:
+                        foodie_dict = {"content": foodie_results}
+                        logger.debug("Using foodie_results as raw content after all parsing failed")
+                else:
+                    foodie_dict = {"content": foodie_results}
+                    logger.debug("Using foodie_results as raw content - no JSON found")
+        
+        logger.debug("Preparing planner input")
+        
+        # Pass the parsed data to create_plan_impl
+        # Since we've fixed the root cause with proper prompts, this should work most of the time
+        try:
+            # Call create_plan_impl with the parsed data
+            result = await create_plan_impl(
+                planner_agent,
+                query,
+                activity_dict,
+                culinary_dict,
+                foodie_dict,
+                event_handler=event_handler
+            )
+            # Successfully processed inputs
+        except Exception as e:
+            # If it fails, try with individual pieces or fall back to direct query
+            logger.error(f"Error in create_plan_impl: {str(e)}")
+            
+            # Try a simplified approach - just send the query to the planner
+            # This is a clean fallback when parsing fails for any reason
+            try:
+                result = await create_plan_impl(planner_agent, query, None, None, None, event_handler=event_handler)
+                logger.debug("Using only query for plan due to parsing issues with specialist data")
+            except Exception as e2:
+                logger.error(f"Error in fallback approach: {str(e2)}")
+                # Final fallback - return a simple error response
+                result = {
+                    "content": "I apologize, but I encountered difficulties processing the specialist information. Please try again with simplified requirements.",
+                    "agent": "Planner Agent"
+                }
         return json.dumps(result)
     
     # Create and return the agent
@@ -226,7 +340,8 @@ def build_coordinator_agent(activity_agent, culinary_agent, foodie_agent, planne
         model=model,
         model_settings=ModelSettings(
             parallel_tool_calls=True,
-            tool_choice="auto",
+            # Force the model to always provide a response after tool calls
+            tool_choice="required",
             temperature=0
         )
     )
@@ -248,8 +363,6 @@ async def run_coordinator_agent(query: str, agent: Agent = None,
     elif agent is None:
         raise ValueError("Either agent or all specialist agents must be provided")
     
-    # Processing is logged via event hooks
-    
     # Set up hooks if an event_handler was provided
     hooks = None
     if event_handler is not None:
@@ -257,7 +370,7 @@ async def run_coordinator_agent(query: str, agent: Agent = None,
     
     try:
         # Get max_turns from environment
-        max_turns = int(os.environ.get("MAX_TURNS", 2))
+        max_turns = int(os.environ.get("MAX_TURNS", 5))
         
         # Run the agent
         result = await Runner.run(
@@ -266,8 +379,6 @@ async def run_coordinator_agent(query: str, agent: Agent = None,
             max_turns=max_turns,
             hooks=hooks
         )
-        
-        # Completion is logged via event hooks
         
         # Return the result
         return {
