@@ -19,3 +19,6 @@ def create_error_handler(tool_name: str) -> Callable:
     return error_handler
 
 # Note: log_agent_action function was moved to event_hooks.py
+
+# Make the AssistantSession class available
+from assistant_agents.memory import AssistantSession

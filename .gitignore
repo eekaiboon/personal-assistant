@@ -17,6 +17,7 @@ env/
 ENV/
 .venv/
 personal_assistant_venv/
+new_venv/
 
 # IDE specific files
 .idea/
@@ -33,6 +34,25 @@ personal_assistant_venv/
 
 # Logs
 *.log
+personal_assistant.log
+
+# Database files
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+conversation_history.db
+test_sessions.db
+None
+
+# Temporary files
+.tmp/
+tmp/
+
+# Cache files
+.cache/
+.pytest_cache/
+__pycache__/
 
 # OS specific
 .DS_Store

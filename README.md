@@ -96,7 +96,11 @@ personal-assistant/
 │   ├── activity.py                  # Activity Suggestion Agent implementation
 │   ├── culinary.py                  # Culinary Agent implementation
 │   ├── foodie.py                    # Foodie Agent implementation
-│   └── planner.py                   # Planner Agent implementation
+│   ├── planner.py                   # Planner Agent implementation
+│   ├── memory.py                    # Session management system
+│   ├── cli.py                       # Command-line interface utilities
+│   ├── errors.py                    # Error handling system
+│   └── event_hooks.py               # Event hooks and logging system
 │
 ├── mock_data/                       # Mock data for all domains
 │   ├── activities.json              # Activity suggestions data
@@ -111,12 +115,20 @@ personal-assistant/
 │   ├── foodie_base.md               # Base prompt for Foodie Agent
 │   └── planner_base.md              # Base prompt for Planner Agent
 │
+├── docs/                            # Additional documentation
+│   └── session_management.md        # Session management documentation
+│
+├── images/                          # Diagrams and illustrations
+│   ├── multi_agent_sequence_diagram.png  # Sequence diagram for agent communication
+│   └── agent_as_tool_diagram.png         # Agent-as-tool architecture diagram
+│
 ├── .env                             # Environment variables (not tracked in git)
 ├── .env.template                    # Template for environment variables
 ├── .gitignore                       # Git ignore file
 ├── main.py                          # Main script for running the assistant
 ├── utils.py                         # Utility functions and mock data access
 ├── test_api.py                      # Script to test API connection
+├── conversation_history.db          # SQLite database for persistent sessions (not tracked in git)
 ├── requirements.txt                 # Project dependencies
 └── README.md                        # Project documentation
 ```
@@ -169,6 +181,7 @@ This system leverages the OpenAI Agent SDK to implement multi-agent orchestratio
 - Implements factory functions for clean agent creation
 - Supports parallel tool execution for improved performance
 - Follows the SDK's recommended patterns for agent communication
+- Integrates the SDK's Session protocol for persistent conversations
 
 #### 2. Agent-as-Tool Pattern
 This system implements the "agent-as-tool" pattern, where:
@@ -179,14 +192,15 @@ This system implements the "agent-as-tool" pattern, where:
 - Results flow to the Planner Agent for synthesis into a cohesive plan
 - Final plan flows back to the Coordinator for delivery to the user
 
-#### 2. Async Communication Flow
+#### 3. Async Communication Flow
 The system uses Python's async/await pattern for non-blocking operations:
 
 - `asyncio` for managing concurrent API calls and tool executions
 - Parallel processing of specialist agent requests
 - Asynchronous LLM API calls that don't block the main thread
+- Non-blocking session operations for conversation management
 
-#### 3. Transparent Logging System
+#### 4. Transparent Logging System
 Comprehensive logging provides visibility into agent operations:
 
 - Colored and formatted logging to differentiate agent activities
@@ -194,15 +208,34 @@ Comprehensive logging provides visibility into agent operations:
 - Clear tracking of decision-making processes
 - Visual indicators for tool calls and their results
 - Progress reporting similar to Claude Code's approach
+- Dedicated event hooks system in `event_hooks.py`
 
-#### 4. LLM Integration
+#### 5. Error Handling System
+Robust error handling throughout the application:
+
+- Hierarchical error classes for different error types
+- Decorators for consistent error handling across functions
+- Graceful degradation with multiple fallback mechanisms
+- Comprehensive error logging and reporting
+- User-friendly error messages that hide technical details
+
+#### 6. Command-Line Interface
+Flexible command-line interface for all system functions:
+
+- Intuitive command arguments and help documentation
+- Session management commands and parameters
+- Interactive commands for session clearing and manipulation
+- Support for both interactive and single-query modes
+- Debug options for development and troubleshooting
+
+#### 7. LLM Integration
 
 - OpenAI-compatible API interface for agent communication
 - Support for custom API endpoints via environment variables
 - Function calling capability for structured tool interactions
 - Dynamic message history management for context-aware conversations
 
-#### 5. Mock Data Services
+#### 8. Mock Data Services
 
 As this project is a learning exercise for multi-agent architecture, it uses JSON-based mock data instead of actual API integrations:
 
@@ -285,12 +318,17 @@ The logging system uses emoji indicators for different operations:
 - Python 3.9+
 - OpenAI API access or compatible API endpoint
 - No external API keys needed (uses mock data)
-- OpenAI Agent SDK (`openai-agent-toolkit>=0.1.11`)
+- Dependencies:
+  - OpenAI Client (`openai>=1.14.0`)
+  - OpenAI Agent SDK (`openai-agent-toolkit>=0.1.11`)
+  - Environment configuration (`python-dotenv>=1.0.0`)
+  - Data validation (`pydantic>=2.0.0`)
+  - Async HTTP client (`aiohttp>=3.8.0`)
 
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/personal-assistant.git
+git clone https://github.com/example/personal-assistant.git
 cd personal-assistant
 
 # Create and activate virtual environment (if not already created)
@@ -381,9 +419,40 @@ async def run_example():
 asyncio.run(run_example())
 ```
 
+## Session Management
+
+The Personal Assistant includes a robust session management system that allows the assistant to remember previous conversations, enabling more natural multi-turn interactions. Sessions can be either in-memory (temporary) or persistent (stored in a SQLite database).
+
+### Key Session Features
+
+- **Persistent Memory**: Conversations are stored and can be recalled across multiple runs
+- **Session Identification**: Each conversation can have a unique session ID
+- **Session Management**: View, clear, and manage conversation history
+
+### Session Commands
+
+```bash
+# Use a specific session ID
+python main.py --session-id "my_session"
+
+# Use in-memory session (no persistence)
+python main.py --in-memory
+
+# Clear a session before starting
+python main.py --session-id "my_session" --clear-session
+
+# List all available sessions
+python main.py --list-sessions
+
+# Specify a custom database path
+python main.py --db-path "custom_sessions.db"
+```
+
+For more details, see the [Session Management Documentation](docs/session_management.md).
+
 ## Future Enhancements
 
-1. **Memory System**: Enhance the recall of past interactions and preferences
+1. ~~**Memory System**: Enhance the recall of past interactions and preferences~~ ✅ Implemented!
 2. **Multi-modal Support**: Add image and voice processing capabilities
 3. **Calendar Integration**: Connect with user calendars for better scheduling
 4. **Personalization**: Improve the adaptation to individual user preferences

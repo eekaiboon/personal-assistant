@@ -7,6 +7,7 @@ and synthesizes results into cohesive responses for the user.
 import os
 import json
 import logging
+import re
 from typing import Dict, Any, List, Optional, Tuple, Union
 from pydantic import BaseModel, Field
 
@@ -239,7 +240,6 @@ def build_coordinator_agent(activity_agent, culinary_agent, foodie_agent, planne
             except json.JSONDecodeError as e:
                 # Extract JSON using regex as a fallback if the direct parse fails
                 logger.error(f"Failed to parse activity_results JSON: {e}")
-                import re
                 json_pattern = r'\{\s*"activities"\s*:\s*\[.*?\]\s*\}'
                 json_matches = re.search(json_pattern, activity_results, re.DOTALL)
                 if json_matches:
@@ -261,7 +261,6 @@ def build_coordinator_agent(activity_agent, culinary_agent, foodie_agent, planne
                 # Successfully parsed culinary results
             except json.JSONDecodeError as e:
                 logger.error(f"Failed to parse culinary_results JSON: {e}")
-                import re
                 json_pattern = r'\{\s*"recipes"\s*:\s*\[.*?\]\s*\}'
                 json_matches = re.search(json_pattern, culinary_results, re.DOTALL)
                 if json_matches:
@@ -282,7 +281,6 @@ def build_coordinator_agent(activity_agent, culinary_agent, foodie_agent, planne
                 # Successfully parsed foodie results
             except json.JSONDecodeError as e:
                 logger.error(f"Failed to parse foodie_results JSON: {e}")
-                import re
                 json_pattern = r'\{\s*"restaurants"\s*:\s*\[.*?\]\s*\}'
                 json_matches = re.search(json_pattern, foodie_results, re.DOTALL)
                 if json_matches:
@@ -337,8 +335,8 @@ def build_coordinator_agent(activity_agent, culinary_agent, foodie_agent, planne
         model=model,
         model_settings=ModelSettings(
             parallel_tool_calls=True,
-            # Force the model to always provide a response after tool calls
-            tool_choice="required",
+            # Allow the model to choose whether to use tools or answer directly
+            tool_choice="auto",
             temperature=0
         )
     )
@@ -346,7 +344,7 @@ def build_coordinator_agent(activity_agent, culinary_agent, foodie_agent, planne
 async def run_coordinator_agent(query: str, agent: Agent = None, 
                                activity_agent=None, culinary_agent=None, 
                                foodie_agent=None, planner_agent=None,
-                               event_handler: Any = None) -> Dict[str, Any]:
+                               event_handler: Any = None, session=None) -> Dict[str, Any]:
     """Run the Coordinator Agent with a specific query."""
     # Build the agent if not provided
     if agent is None and all([activity_agent, culinary_agent, foodie_agent, planner_agent]):
@@ -369,13 +367,23 @@ async def run_coordinator_agent(query: str, agent: Agent = None,
         # Get max_turns from environment
         max_turns = int(os.environ.get("MAX_TURNS", 5))
         
-        # Run the agent
-        result = await Runner.run(
-            starting_agent=agent,
-            input=query,
-            max_turns=max_turns,
-            hooks=hooks
-        )
+        # Run the agent with session if provided
+        if session:
+            result = await Runner.run(
+                starting_agent=agent,
+                input=query,
+                max_turns=max_turns,
+                hooks=hooks,
+                session=session
+            )
+        else:
+            # Fallback to non-session mode
+            result = await Runner.run(
+                starting_agent=agent,
+                input=query,
+                max_turns=max_turns,
+                hooks=hooks
+            )
         
         # Return the result
         return {
