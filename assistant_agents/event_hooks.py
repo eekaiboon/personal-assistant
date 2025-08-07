@@ -5,6 +5,7 @@ This module centralizes all logging configuration and event handling for agents.
 
 import os
 import sys
+import json
 import logging
 from typing import Any, Dict, Optional
 
@@ -109,11 +110,35 @@ class AgentRunHooks(RunHooks):
         agent_name = agent.name if agent else "Unknown Agent"
         self.current_agent = agent_name
         
-        logger.info(f"\n[Agent updated: {agent_name}]\n")
+        # Always log agent updates for visibility
+        root_logger = logging.getLogger()
+        root_logger.info(f"\n[Agent updated: {agent_name}]")
         
-        # When an agent is updated, we can use this to show initialization messages
-        if any(agent_type in agent_name for agent_type in ["Activity", "Culinary", "Foodie", "Planner", "Coordinator"]):
-            log_agent_action(agent_name, "init")
+        # Get emoji based on agent type
+        emoji = ""
+        if "Activity" in agent_name:
+            emoji = "🎡 [Activity Agent]"
+        elif "Culinary" in agent_name:
+            emoji = "🍲 [Culinary Agent]"
+        elif "Foodie" in agent_name:
+            emoji = "🍴 [Foodie Agent]"
+        elif "Planner" in agent_name:
+            emoji = "📑 [Planner Agent]"
+        elif "Coordinator" in agent_name:
+            emoji = "👨‍💻 [Coordinator]"
+            
+        # When an agent is updated, show initialization/processing messages
+        if emoji:
+            # Get the input if available to show what the agent is processing
+            input_text = None
+            if hasattr(context, 'input') and context.input:
+                input_text = context.input
+                
+            if input_text:
+                root_logger.info(f"\n{emoji} Processing: '{input_text[:80]}{'...' if len(input_text) > 80 else ''}'")
+            else:
+                # Fall back to default initialization message
+                log_agent_action(agent_name, "init")
     
     async def on_agent_end(self, context: RunContextWrapper, agent: Agent, output: Any) -> None:
         """Called when an agent completes processing."""
@@ -136,17 +161,39 @@ class AgentRunHooks(RunHooks):
         # Log the tool completion
         logger.debug(f"{agent_name} completed tool: {tool_name}")
         
-        # Log completion message
+        # Get emoji for agent
+        emoji = ""
         if "Activity" in agent_name:
-            logger.info(f"🎡 [Activity Agent] Completed tool: {tool_name}")
+            emoji = "🎡 [Activity Agent]"
         elif "Culinary" in agent_name:
-            logger.info(f"🍲 [Culinary Agent] Completed tool: {tool_name}")
+            emoji = "🍲 [Culinary Agent]"
         elif "Foodie" in agent_name:
-            logger.info(f"🍴 [Foodie Agent] Completed tool: {tool_name}")
+            emoji = "🍴 [Foodie Agent]"
         elif "Planner" in agent_name:
-            logger.info(f"📑 [Planner Agent] Completed tool: {tool_name}")
+            emoji = "📑 [Planner Agent]"
         elif "Coordinator" in agent_name:
-            logger.info(f"👨‍💻 [Coordinator] Completed tool: {tool_name}")
+            emoji = "👨‍💻 [Coordinator]"
+        
+        # Display the result in a more user-friendly format
+        if result:
+            # Try to parse JSON result
+            try:
+                result_data = json.loads(result)
+                if isinstance(result_data, dict) and "content" in result_data:
+                    # For specialist agent results
+                    root_logger = logging.getLogger()
+                    if emoji:
+                        root_logger.info(f"\n{emoji} Completed: {tool_name}")
+                        root_logger.info(f"[tool output: {result[:100]}...]")
+                    else:
+                        root_logger.info(f"\n[{agent_name} completed tool: {tool_name}]")
+            except (json.JSONDecodeError, TypeError):
+                # Not a JSON result or couldn't be parsed
+                logger.debug(f"Tool result (non-JSON): {result[:100]}...")
+                
+        # Log completion message
+        if emoji:
+            logger.info(f"{emoji} Completed tool: {tool_name}")
         else:
             logger.info(f"\n[{agent_name} completed tool: {tool_name}]")
     

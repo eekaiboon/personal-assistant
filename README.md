@@ -6,6 +6,59 @@ A multi-agent AI system for comprehensive personal assistance, designed using a 
 
 This system follows a **hub-and-spoke design**. The **Head Coordinator Agent** is the hub (central coordinator), and the **specialized agents** are the spokes. User queries go first to the Head Coordinator, which breaks down the problem and delegates to the appropriate specialist agents. It treats each specialist as a callable tool, invoking them for their portion of the task.
 
+### Multi-Agent System Design
+
+```mermaid
+graph TD
+    User([User]) <-->|Request/Response| HC[Head Coordinator Agent]
+    
+    %% Specialist Agents
+    HC -->|1. Activity Query| AA[Activity Agent]
+    HC -->|2. Food Recipe Query| CA[Culinary Agent]
+    HC -->|3. Restaurant Query| FA[Foodie Agent]
+    
+    %% Results flow back to coordinator
+    AA -->|Activity Results| HC
+    CA -->|Recipe Results| HC
+    FA -->|Restaurant Results| HC
+    
+    %% Plan synthesis
+    HC -->|4. Specialist Results| PA[Planner Agent]
+    PA -->|5. Synthesized Plan| HC
+    
+    %% Tool Access
+    AA -->|Uses| AT[Activity Tools]
+    CA -->|Uses| CT[Culinary Tools]
+    FA -->|Uses| FT[Foodie Tools]
+    PA -->|Uses| PT[Planner Tools]
+    
+    %% Style definitions
+    classDef coordinator fill:#ff9900,stroke:#333,stroke-width:2px
+    classDef specialist fill:#42b983,stroke:#333,stroke-width:1px
+    classDef tool fill:#bbdefb,stroke:#333,stroke-width:1px
+    classDef user fill:#e1bee7,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
+    
+    %% Apply styles
+    class HC coordinator
+    class AA,CA,FA,PA specialist
+    class AT,CT,FT,PT tool
+    class User user
+    
+    %% Add descriptions
+    subgraph "Hub"
+        HC
+    end
+    
+    subgraph "Specialist Spokes"
+        AA
+        CA
+        FA
+        PA
+    end
+```
+
+The diagram illustrates the hub-and-spoke architecture, where the Head Coordinator Agent acts as the central hub that delegates tasks to specialized agents and synthesizes their responses.
+
 ### Key Components
 
 1. **Head Coordinator Agent**: The central orchestrator that:
@@ -116,6 +169,39 @@ personal-assistant/
    - Planner Agent returns the synthesized plan to the Coordinator
    - Head Coordinator formulates the final response to the user
    - Follow-up actions are suggested if applicable
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant HC as Head Coordinator
+    participant AA as Activity Agent
+    participant CA as Culinary Agent
+    participant FA as Foodie Agent
+    participant PA as Planner Agent
+    
+    User->>HC: Submit request
+    Note over HC: Process request & identify needed specialists
+    
+    par Parallel specialist calls
+        HC->>AA: Query for activities
+        HC->>CA: Query for recipes
+        HC->>FA: Query for restaurants
+    end
+    
+    AA-->>HC: Return activity suggestions
+    CA-->>HC: Return recipe suggestions
+    FA-->>HC: Return restaurant suggestions
+    
+    Note over HC: Collect all specialist outputs
+    
+    HC->>PA: Send combined specialist results
+    Note over PA: Synthesize into coherent plan
+    PA-->>HC: Return integrated plan
+    
+    HC-->>User: Deliver final response
+```
+
+This sequence diagram shows how the system processes user requests through parallel specialist invocation and plan synthesis.
 
 ### Key Technical Components
 

@@ -47,7 +47,8 @@ async def main() -> None:
     # Run the interactive demo loop with the head coordinator agent and our custom hooks
     await run_demo_loop(
         agent=head_coordinator,
-        stream=True
+        stream=True,
+        hooks=agent_hooks  # Pass our custom hooks to get proper logging
     )
     
     # Note: The OpenAI SDK doesn't support passing a stream_handler to run_demo_loop
