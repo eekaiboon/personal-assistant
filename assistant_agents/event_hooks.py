@@ -137,8 +137,9 @@ class AgentRunHooks(RunHooks):
         """Called when an agent completes processing."""
         agent_name = agent.name if agent else "Unknown Agent"
         
-        # Log completion for specialized agents
-        if any(agent_type in agent_name for agent_type in ["Activity", "Culinary", "Foodie", "Planner", "Coordinator"]):
+        # Only log completion for specialized agents when they're not the final agent
+        # This avoids duplicate output for the Head Coordinator Agent
+        if agent_name != "Head Coordinator Agent" and any(agent_type in agent_name for agent_type in ["Activity", "Culinary", "Foodie", "Planner"]):
             log_agent_action(agent_name, "complete")
     
     async def on_tool_start(self, context: RunContextWrapper, agent: Agent, tool: Tool) -> None:
@@ -186,15 +187,6 @@ class AgentRunHooks(RunHooks):
                     
                     # Log the full tool output
                     logger.info(f"[tool output: {json.dumps(result_data, indent=2)}]")
-                    
-                    # Special handling for create_plan tool - display output directly to user
-                    if tool_name == "create_plan" and "content" in result_data:
-                        plan_content = result_data["content"]
-                        # Print the plan directly to stdout for the user to see
-                        if not plan_content.startswith("\n"):
-                            print("\n")
-                        print(plan_content)
-                        print("\n")
                 else:
                     # Non-dict JSON result
                     log_agent_action(agent_name, "tool_end", None, tool_name)
