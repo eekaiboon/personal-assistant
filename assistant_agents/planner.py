@@ -5,11 +5,8 @@ Specializes in creating comprehensive plans by synthesizing information from oth
 
 import json
 import os
-import logging
 from typing import Dict, Any, List, Optional
 from pydantic import BaseModel, Field
-
-logger = logging.getLogger(__name__)
 
 from agents import Agent, ModelSettings, function_tool, Runner
 from assistant_agents import create_error_handler
