@@ -118,9 +118,7 @@ personal-assistant/
 ├── docs/                            # Additional documentation
 │   └── session_management.md        # Session management documentation
 │
-├── images/                          # Diagrams and illustrations
-│   ├── multi_agent_sequence_diagram.png  # Sequence diagram for agent communication
-│   └── agent_as_tool_diagram.png         # Agent-as-tool architecture diagram
+# Diagrams are now created using Mermaid directly in the README
 │
 ├── .env                             # Environment variables (not tracked in git)
 ├── .env.template                    # Template for environment variables
@@ -160,13 +158,59 @@ personal-assistant/
    - Head Coordinator formulates the final response to the user
    - Follow-up actions are suggested if applicable
 
-![Multi-Agent System Communication Flow](images/multi_agent_sequence_diagram.png)
+### Multi-Agent Communication Flow
 
-![Agent-as-Tool Architecture](images/agent_as_tool_diagram.png)
+```mermaid
+sequenceDiagram
+    participant User
+    participant Head Coordinator
+    participant Activity Agent
+    participant Culinary Agent
+    participant Foodie Agent
+    participant Planner Agent
+    
+    User->>Head Coordinator: Submit request
+    Note over Head Coordinator: Process request & identify needed specialists
+    par [Parallel specialist calls]
+        Head Coordinator->>Activity Agent: Query for activities
+        Head Coordinator->>Culinary Agent: Query for recipes
+        Head Coordinator->>Foodie Agent: Query for restaurants
+    end
+    Activity Agent-->>Head Coordinator: Return activity suggestions
+    Culinary Agent-->>Head Coordinator: Return recipe suggestions
+    Foodie Agent-->>Head Coordinator: Return restaurant suggestions
+    Note over Head Coordinator: Collect all specialist outputs
+    Head Coordinator->>Planner Agent: Send combined specialist results
+    Planner Agent-->>Head Coordinator: Return integrated plan
+    Head Coordinator-->>User: Deliver final response
+```
 
-*Figure: Agent-as-Tool Architecture diagram showing how the Head Coordinator invokes specialist agents as tools*
+### Agent-as-Tool Architecture
+
+```mermaid
+graph TD
+    User((User)) <--> HC[Head Coordinator Agent]
+    HC -->|Invokes| AAT[Activity Agent Tool]
+    HC -->|Invokes| CAT[Culinary Agent Tool]
+    HC -->|Invokes| FAT[Foodie Agent Tool]
+    HC -->|Invokes| PAT[Planner Agent Tool]
+    AAT -->|Calls| AA[Activity Agent]
+    CAT -->|Calls| CA[Culinary Agent]
+    FAT -->|Calls| FA[Foodie Agent]
+    PAT -->|Calls| PA[Planner Agent]
+    AA -->|Uses| AT[Activity Tools]
+    CA -->|Uses| CT[Culinary Tools]
+    FA -->|Uses| FT[Foodie Tools]
+    PA -->|Uses| PT[Planner Tools]
+    AAT -->|Results| HC
+    CAT -->|Results| HC
+    FAT -->|Results| HC
+    PAT -->|Results| HC
+```
 
 *Figure: Sequence diagram showing the communication flow between agents, including parallel specialist calls and plan synthesis.*
+
+*Figure: Agent-as-Tool Architecture diagram showing how the Head Coordinator invokes specialist agents as tools*
 
 The agent-as-tool diagram above illustrates how each specialist agent is wrapped as a function tool that the Head Coordinator invokes, rather than calling the agents directly. This pattern allows for cleaner separation of concerns and more flexible orchestration of the multi-agent system.
 
