@@ -170,36 +170,9 @@ personal-assistant/
    - Head Coordinator formulates the final response to the user
    - Follow-up actions are suggested if applicable
 
-```mermaid
-sequenceDiagram
-    actor User
-    participant HC as Head Coordinator
-    participant AA as Activity Agent
-    participant CA as Culinary Agent
-    participant FA as Foodie Agent
-    participant PA as Planner Agent
-    
-    User->>HC: Submit request
-    Note over HC: Process request & identify needed specialists
-    
-    par Parallel specialist calls
-        HC->>AA: Query for activities
-        HC->>CA: Query for recipes
-        HC->>FA: Query for restaurants
-    end
-    
-    AA-->>HC: Return activity suggestions
-    CA-->>HC: Return recipe suggestions
-    FA-->>HC: Return restaurant suggestions
-    
-    Note over HC: Collect all specialist outputs
-    
-    HC->>PA: Send combined specialist results
-    Note over PA: Synthesize into coherent plan
-    PA-->>HC: Return integrated plan
-    
-    HC-->>User: Deliver final response
-```
+![Multi-Agent System Communication Flow](images/multi_agent_sequence_diagram.png)
+
+*Figure: Sequence diagram showing the communication flow between agents, including parallel specialist calls and plan synthesis.*
 
 This sequence diagram shows how the system processes user requests through parallel specialist invocation and plan synthesis.
 
