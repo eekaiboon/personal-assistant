@@ -27,7 +27,7 @@ from assistant_agents.coordinator import build_coordinator_agent, run_coordinato
 load_dotenv()
 
 # Use logger configured by event_hooks.py
-logger = logging.getLogger(__name__)
+logger = logging.getLogger()
 
 @dataclass
 class AssistantAgentBundle:
@@ -50,8 +50,8 @@ def build_assistant_agents() -> AssistantAgentBundle:
     configure_openai_client()
         
     # Get configuration from environment
-    model = os.environ.get("MODEL", "gpt-4")
-    max_turns = int(os.environ.get("MAX_TURNS", 2))
+    model = os.environ.get("MODEL", "gpt-4o")
+    max_turns = int(os.environ.get("MAX_TURNS", 5))
     logger.info(f"Using model: {model}")
     
     logger.info("Initializing agent system...")

@@ -190,7 +190,7 @@ async def run_culinary_agent(query: str, agent: Agent = None, event_handler: Any
         hooks = agent_hooks
     
     # Get max_turns from environment
-    max_turns = int(os.environ.get("MAX_TURNS", 2))
+    max_turns = int(os.environ.get("MAX_TURNS", 5))
     
     # Run the agent
     result = await Runner.run(

@@ -66,3 +66,25 @@ Variations and Substitutions:
 Storage and Leftovers:
 [Any tips about storage or using leftovers]
 ```
+
+## Important JSON Structure Requirements
+
+Your response will be processed by other agents that require properly structured data. Always ensure your response includes a machine-readable structured representation of your recipe suggestions in this format:
+
+```json
+{
+  "recipes": [
+    {
+      "name": "Recipe Name",
+      "cuisine": "Cuisine type",
+      "preparation_time": "15 minutes",
+      "cooking_time": "30 minutes",
+      "description": "Brief description",
+      "kid_friendly": true
+    },
+    {"...more recipes..."}
+  ]
+}
+```
+
+Always verify your JSON is valid with properly closed brackets and braces before submitting your response.

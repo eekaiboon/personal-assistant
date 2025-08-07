@@ -60,8 +60,13 @@ def load_mock_data(filename: str) -> dict:
     """Load mock data from a JSON file."""
     file_path = mock_data_path(filename)
     if file_path.exists():
-        with open(file_path, "r") as f:
-            return json.load(f)
+        try:
+            with open(file_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except UnicodeDecodeError:
+            # Fallback to latin-1 encoding if UTF-8 fails
+            with open(file_path, "r", encoding="latin-1") as f:
+                return json.load(f)
     return {}
 
 
@@ -87,11 +92,12 @@ def get_activities(**filters) -> list:
         for activity in activities:
             match = True
             
-            # Age filter
-            if "age_min" in filters and activity.get("age_min", 0) < filters["age_min"]:
-                match = False
-            if "age_max" in filters and activity.get("age_max", 99) > filters["age_max"]:
-                match = False
+            # Age filter - activity is appropriate if its min age is <= our min filter and its max age is >= our max filter
+            if "age_min" in filters and activity.get("age_min", 0) > filters["age_min"]:
+                match = False  # Activity minimum age is too high
+            
+            if "age_max" in filters and activity.get("age_max", 99) < filters["age_max"]:
+                match = False  # Activity maximum age is too low
                 
             # Indoor/outdoor filter
             if "indoor" in filters and activity.get("indoor") != filters["indoor"]:

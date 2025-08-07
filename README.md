@@ -10,54 +10,26 @@ This system follows a **hub-and-spoke design**. The **Head Coordinator Agent** i
 
 ```mermaid
 graph TD
-    User([User]) <-->|Request/Response| HC[Head Coordinator Agent]
-    
-    %% Specialist Agents
-    HC -->|1. Activity Query| AA[Activity Agent]
-    HC -->|2. Food Recipe Query| CA[Culinary Agent]
-    HC -->|3. Restaurant Query| FA[Foodie Agent]
-    
-    %% Results flow back to coordinator
-    AA -->|Activity Results| HC
-    CA -->|Recipe Results| HC
-    FA -->|Restaurant Results| HC
-    
-    %% Plan synthesis
-    HC -->|4. Specialist Results| PA[Planner Agent]
-    PA -->|5. Synthesized Plan| HC
-    
-    %% Tool Access
-    AA -->|Uses| AT[Activity Tools]
-    CA -->|Uses| CT[Culinary Tools]
-    FA -->|Uses| FT[Foodie Tools]
-    PA -->|Uses| PT[Planner Tools]
-    
-    %% Style definitions
-    classDef coordinator fill:#ff9900,stroke:#333,stroke-width:2px
-    classDef specialist fill:#42b983,stroke:#333,stroke-width:1px
-    classDef tool fill:#bbdefb,stroke:#333,stroke-width:1px
-    classDef user fill:#e1bee7,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
-    
-    %% Apply styles
-    class HC coordinator
-    class AA,CA,FA,PA specialist
-    class AT,CT,FT,PT tool
-    class User user
-    
-    %% Add descriptions
-    subgraph "Hub"
-        HC
-    end
-    
-    subgraph "Specialist Spokes"
-        AA
-        CA
-        FA
-        PA
-    end
+User((User)) <--> HC[Head Coordinator Agent]
+HC -->|Invokes| AAT[Activity Agent Tool]
+HC -->|Invokes| CAT[Culinary Agent Tool]
+HC -->|Invokes| FAT[Foodie Agent Tool]
+HC -->|Invokes| PAT[Planner Agent Tool]
+AAT -->|Calls| AA[Activity Agent]
+CAT -->|Calls| CA[Culinary Agent]
+FAT -->|Calls| FA[Foodie Agent]
+PAT -->|Calls| PA[Planner Agent]
+AA -->|Uses| AT[Activity Tools]
+CA -->|Uses| CT[Culinary Tools]
+FA -->|Uses| FT[Foodie Tools]
+PA -->|Uses| PT[Planner Tools]
+AAT -->|Results| HC
+CAT -->|Results| HC
+FAT -->|Results| HC
+PAT -->|Results| HC
 ```
 
-The diagram illustrates the hub-and-spoke architecture, where the Head Coordinator Agent acts as the central hub that delegates tasks to specialized agents and synthesizes their responses.
+The diagram illustrates the hub-and-spoke architecture with the agent-as-tool pattern. The Head Coordinator Agent acts as the central hub that delegates tasks to specialized agent tools rather than calling the agents directly. Each specialist agent is wrapped as a function tool that the coordinator invokes, and each specialist agent has access to its own set of domain-specific tools.
 
 ### Key Components
 
@@ -104,6 +76,12 @@ The system is designed to handle queries like:
 4. **Recipe Assistance**: "Remind me how to cook my favorite sesame noodles from last week"
    - Culinary Agent retrieves the recipe
    - System maintains memory of past interactions
+   
+5. **Comprehensive Planning**: "I want to plan a weekend with my family including my 2-year-old toddler in Sunnyvale. We'd like to find some outdoor activities on Saturday morning, eat at a kid-friendly restaurant for lunch, and then I want to cook a simple Asian dinner at home. Can you help me create a plan?"
+   - Activity Suggestion Agent finds toddler-friendly outdoor activities
+   - Foodie Agent locates kid-friendly restaurants
+   - Culinary Agent suggests simple Asian dinner recipes
+   - Planner Agent creates a comprehensive day plan
 
 ## Implementation Details
 
@@ -172,7 +150,13 @@ personal-assistant/
 
 ![Multi-Agent System Communication Flow](images/multi_agent_sequence_diagram.png)
 
+![Agent-as-Tool Architecture](images/agent_as_tool_diagram.png)
+
+*Figure: Agent-as-Tool Architecture diagram showing how the Head Coordinator invokes specialist agents as tools*
+
 *Figure: Sequence diagram showing the communication flow between agents, including parallel specialist calls and plan synthesis.*
+
+The agent-as-tool diagram above illustrates how each specialist agent is wrapped as a function tool that the Head Coordinator invokes, rather than calling the agents directly. This pattern allows for cleaner separation of concerns and more flexible orchestration of the multi-agent system.
 
 This sequence diagram shows how the system processes user requests through parallel specialist invocation and plan synthesis.
 

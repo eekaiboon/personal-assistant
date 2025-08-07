@@ -121,19 +121,16 @@ async def create_plan_impl(planner_agent, query: str, activity_results: Optional
             if foodie_results is not None:
                 planner_input["foodie_results"] = foodie_results
             
-            # Log and serialize the input for the planner
-            logger.debug("Preparing planner input with specialist results")
+            # Serialize and process the input for the planner
             try:
                 json_input = json.dumps(planner_input)
-                logger.debug("Successfully serialized planner input to JSON")
                 result = await run_planner_agent(json_input, planner_agent, event_handler=event_handler)
             except Exception as json_error:
                 # If we can't serialize the input, fall back to just the query
                 logger.error(f"JSON serialization error: {str(json_error)}")
                 result = await run_planner_agent(query, planner_agent, event_handler=event_handler)
         else:
-            # Direct query to the planner
-            logger.debug("No specialist agent results, sending direct query to planner")
+            # Direct query to the planner when no specialist results
             result = await run_planner_agent(query, planner_agent, event_handler=event_handler)
         
         return result
@@ -299,7 +296,7 @@ def build_coordinator_agent(activity_agent, culinary_agent, foodie_agent, planne
                     foodie_dict = {"content": foodie_results}
                     logger.debug("Using foodie_results as raw content - no JSON found")
         
-        logger.debug("Preparing planner input")
+        # Prepare input for the planner
         
         # Pass the parsed data to create_plan_impl
         # Since we've fixed the root cause with proper prompts, this should work most of the time

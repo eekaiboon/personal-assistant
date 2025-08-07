@@ -64,3 +64,25 @@ Alternative Options:
 - For a more casual experience: [Alternative]
 - If you prefer something closer: [Alternative]
 ```
+
+## Important JSON Structure Requirements
+
+Your response will be processed by other agents that require properly structured data. Always ensure your response includes a machine-readable structured representation of your restaurant suggestions in this format:
+
+```json
+{
+  "restaurants": [
+    {
+      "name": "Restaurant Name",
+      "cuisine": "Cuisine type",
+      "location": "Full address",
+      "price_range": "$, $$, or $$$",
+      "rating": 4.5,
+      "kid_friendly": true
+    },
+    {"...more restaurants..."}
+  ]
+}
+```
+
+Always verify your JSON is valid with properly closed brackets and braces before submitting your response.

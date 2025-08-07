@@ -13,60 +13,47 @@ from agents import RunHooks, Agent
 from agents.lifecycle import RunContextWrapper
 from agents.tool import Tool
 
-# Core logging configuration function
+# Simple logging configuration
 def setup_logging(log_file: str = 'personal_assistant.log'):
-    """Set up centralized logging for the entire application."""
+    """Set up simple centralized logging for the entire application."""
     # Configure root logger
-    root_logger = logging.getLogger()
-    root_logger.setLevel(logging.INFO)
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)
     
     # Remove any existing handlers to avoid duplicates
-    for handler in root_logger.handlers:
-        root_logger.removeHandler(handler)
+    for handler in logger.handlers:
+        logger.removeHandler(handler)
         
     # Suppress all non-essential logs
-    suppress_loggers = [
-        "openai", "httpx", "httpcore", "agents", 
-        "agents.agent", "assistant_agents"
-    ]
-    
+    suppress_loggers = ["openai", "httpx", "httpcore", "agents"]
     for logger_name in suppress_loggers:
-        level = logging.CRITICAL if logger_name == "agents.agent" else logging.ERROR
-        logging.getLogger(logger_name).setLevel(level)
+        logging.getLogger(logger_name).setLevel(logging.ERROR)
     
-    # Set up a simple console handler
+    # Simple console handler with clean output
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setFormatter(logging.Formatter('%(message)s'))
-    root_logger.addHandler(console_handler)
+    logger.addHandler(console_handler)
     
-    # Create a separate file handler for detailed logs
+    # File handler for complete logs
     file_handler = logging.FileHandler(log_file)
-    file_handler.setFormatter(logging.Formatter('%(asctime)s | %(name)s | %(levelname)s | %(message)s'))
-    root_logger.addHandler(file_handler)
+    file_handler.setFormatter(logging.Formatter('%(asctime)s | %(levelname)s | %(message)s'))
+    logger.addHandler(file_handler)
     
-    # Ensure propagation of logs from subagents
-    subagent_loggers = [
-        "assistant_agents", "assistant_agents.activity", 
-        "assistant_agents.culinary", "assistant_agents.foodie", 
-        "assistant_agents.planner"
-    ]
-    
-    for name in subagent_loggers:
-        sub_logger = logging.getLogger(name)
-        sub_logger.setLevel(logging.INFO)
-        # Ensure propagation is True (default) so logs go to root logger
-        sub_logger.propagate = True
-    
-    return root_logger
+    return logger
 
-# Configure this module's logger - will be set up properly when setup_logging is called
-logger = logging.getLogger(__name__)
+# We'll use the root logger for all logging
+logger = logging.getLogger()
 
-# Logging helper function moved from __init__.py
-def log_agent_action(agent_name: str, action: str, message: str = None):
-    """Log agent actions with consistent formatting and emojis."""
-    root_logger = logging.getLogger()
+# Helper function for consistent agent action logging
+def log_agent_action(agent_name: str, action: str, message: str = None, tool_name: str = None):
+    """Log agent actions with consistent formatting and emojis.
     
+    Args:
+        agent_name: The name of the agent
+        action: Action type (init, processing, complete, tool_start, tool_end, handoff)
+        message: Optional message to include with the action
+        tool_name: Optional tool name for tool-related actions
+    """
     emoji = ""
     if "Activity" in agent_name:
         emoji = "🎡 [Activity Agent]"
@@ -79,20 +66,39 @@ def log_agent_action(agent_name: str, action: str, message: str = None):
     elif "Coordinator" in agent_name:
         emoji = "👨‍💻 [Coordinator]"
     
-    if not emoji:
-        return
-        
+    # If no emoji found, use generic format
+    label = emoji if emoji else f"[{agent_name}]"
+    
+    # Log based on action type
     if action == "init":
-        root_logger.info(f"\n{emoji} Initializing with tools")
+        logger.info(f"\n{label} Initializing with tools")
     elif action == "processing":
         if message:
-            root_logger.info(f"\n{emoji} Processing request: '{message[:50]}{'...' if len(message) > 50 else ''}'")
+            logger.info(f"\n{label} Processing request: '{message[:50]}{'...' if len(message) > 50 else ''}'")
         else:
-            root_logger.info(f"\n{emoji} Processing request")
+            logger.info(f"\n{label} Processing request")
     elif action == "planning":
-        root_logger.info(f"\n{emoji} Creating comprehensive plan...")
+        logger.info(f"\n{label} Creating comprehensive plan...")
     elif action == "complete":
-        root_logger.info(f"\n{emoji} Completed analysis and recommendations")
+        logger.info(f"\n{label} Completed analysis and recommendations")
+    elif action == "tool_start":
+        param_str = message or ""
+        if param_str:
+            logger.info(f"\n[tool called: {tool_name}({param_str})]")
+        else:
+            logger.info(f"\n[tool called: {tool_name}]")
+    elif action == "tool_end":
+        if tool_name:
+            agent_label = message or ""
+            logger.info(f"\n{label} Completed tool: {tool_name}{agent_label}")
+        else:
+            logger.info(f"\n{label} Tool completed")
+    elif action == "handoff":
+        to_agent = message or "Unknown Agent"
+        logger.info(f"\n[Handoff from {agent_name} to {to_agent}]")
+    else:
+        logger.info(f"\n{label} {action}")
+
 
 class AgentRunHooks(RunHooks):
     """
@@ -110,40 +116,28 @@ class AgentRunHooks(RunHooks):
         agent_name = agent.name if agent else "Unknown Agent"
         self.current_agent = agent_name
         
-        # Always log agent updates for visibility
-        root_logger = logging.getLogger()
-        root_logger.info(f"\n[Agent updated: {agent_name}]")
+        # Log agent transition
+        logger.info(f"\n[Agent updated: {agent_name}]")
         
-        # Get emoji based on agent type
-        emoji = ""
-        if "Activity" in agent_name:
-            emoji = "🎡 [Activity Agent]"
-        elif "Culinary" in agent_name:
-            emoji = "🍲 [Culinary Agent]"
-        elif "Foodie" in agent_name:
-            emoji = "🍴 [Foodie Agent]"
-        elif "Planner" in agent_name:
-            emoji = "📑 [Planner Agent]"
-        elif "Coordinator" in agent_name:
-            emoji = "👨‍💻 [Coordinator]"
-            
-        # When an agent is updated, show initialization/processing messages
-        if emoji:
-            # Get the input if available to show what the agent is processing
-            input_text = None
+        # Get input text if available
+        input_text = None
+        try:
             if hasattr(context, 'input') and context.input:
                 input_text = context.input
-                
-            if input_text:
-                root_logger.info(f"\n{emoji} Processing: '{input_text[:80]}{'...' if len(input_text) > 80 else ''}'")
-            else:
-                # Fall back to default initialization message
-                log_agent_action(agent_name, "init")
+        except Exception:
+            pass
+            
+        # Log agent initialization with appropriate emoji
+        if input_text:
+            log_agent_action(agent_name, "processing", input_text)
+        else:
+            log_agent_action(agent_name, "init")
     
     async def on_agent_end(self, context: RunContextWrapper, agent: Agent, output: Any) -> None:
         """Called when an agent completes processing."""
         agent_name = agent.name if agent else "Unknown Agent"
         
+        # Log completion for specialized agents
         if any(agent_type in agent_name for agent_type in ["Activity", "Culinary", "Foodie", "Planner", "Coordinator"]):
             log_agent_action(agent_name, "complete")
     
@@ -151,59 +145,82 @@ class AgentRunHooks(RunHooks):
         """Called when a tool is about to be executed."""
         agent_name = agent.name if agent else "Unknown Agent"
         tool_name = tool.name if hasattr(tool, 'name') else "Unknown Tool"
-        logger.info(f"\n[{agent_name} called tool: {tool_name}]")
+        
+        # Get parameters if available
+        tool_params = {}
+        try:
+            if hasattr(context, 'step_state') and hasattr(context.step_state, 'current_item'):
+                current_item = context.step_state.current_item
+                if hasattr(current_item, 'tool_call') and current_item.tool_call:
+                    if hasattr(current_item.tool_call, 'parameters'):
+                        tool_params = current_item.tool_call.parameters
+        except Exception:
+            pass
+        
+        # Log tool call using the helper function
+        if tool_params:
+            param_str = ", ".join([f"{k}={v}" for k, v in tool_params.items()])
+            log_agent_action(agent_name, "tool_start", param_str, tool_name)
+        else:
+            log_agent_action(agent_name, "tool_start", None, tool_name)
     
     async def on_tool_end(self, context: RunContextWrapper, agent: Agent, tool: Tool, result: str) -> None:
         """Called when a tool execution completes."""
         agent_name = agent.name if agent else "Unknown Agent"
         tool_name = tool.name if hasattr(tool, 'name') else "Unknown Tool"
         
-        # Log the tool completion
-        logger.debug(f"{agent_name} completed tool: {tool_name}")
-        
-        # Get emoji for agent
-        emoji = ""
-        if "Activity" in agent_name:
-            emoji = "🎡 [Activity Agent]"
-        elif "Culinary" in agent_name:
-            emoji = "🍲 [Culinary Agent]"
-        elif "Foodie" in agent_name:
-            emoji = "🍴 [Foodie Agent]"
-        elif "Planner" in agent_name:
-            emoji = "📑 [Planner Agent]"
-        elif "Coordinator" in agent_name:
-            emoji = "👨‍💻 [Coordinator]"
-        
-        # Display the result in a more user-friendly format
+        # Process and log the result
         if result:
-            # Try to parse JSON result
             try:
+                # Try to parse as JSON
                 result_data = json.loads(result)
-                if isinstance(result_data, dict) and "content" in result_data:
-                    # For specialist agent results
-                    root_logger = logging.getLogger()
-                    if emoji:
-                        root_logger.info(f"\n{emoji} Completed: {tool_name}")
-                        root_logger.info(f"[tool output: {result[:100]}...]")
-                    else:
-                        root_logger.info(f"\n[{agent_name} completed tool: {tool_name}]")
-            except (json.JSONDecodeError, TypeError):
-                # Not a JSON result or couldn't be parsed
-                logger.debug(f"Tool result (non-JSON): {result[:100]}...")
                 
-        # Log completion message
-        if emoji:
-            logger.info(f"{emoji} Completed tool: {tool_name}")
+                if isinstance(result_data, dict):
+                    # Handle dict results
+                    agent_label = ""
+                    if "agent" in result_data:
+                        agent_label = f" from {result_data['agent']}"
+                    
+                    # Log completion using helper function
+                    log_agent_action(agent_name, "tool_end", agent_label, tool_name)
+                    
+                    # Log the full tool output
+                    logger.info(f"[tool output: {json.dumps(result_data, indent=2)}]")
+                    
+                    # Special handling for create_plan tool - display output directly to user
+                    if tool_name == "create_plan" and "content" in result_data:
+                        plan_content = result_data["content"]
+                        # Print the plan directly to stdout for the user to see
+                        if not plan_content.startswith("\n"):
+                            print("\n")
+                        print(plan_content)
+                        print("\n")
+                else:
+                    # Non-dict JSON result
+                    log_agent_action(agent_name, "tool_end", None, tool_name)
+                    logger.info(f"[tool output: {json.dumps(result_data)}]")
+            except (json.JSONDecodeError, TypeError):
+                # Non-JSON result
+                log_agent_action(agent_name, "tool_end", None, tool_name)
+                logger.info(f"[tool output: {result[:1000]}{'...' if len(result) > 1000 else ''}]")
         else:
-            logger.info(f"\n[{agent_name} completed tool: {tool_name}]")
+            # No result
+            log_agent_action(agent_name, "tool_end", None, tool_name)
+            logger.info(f"[tool output: No result]")
+
+
     
     async def on_handoff(self, context: RunContextWrapper, from_agent: Agent, to_agent: Agent) -> None:
         """Called when one agent hands off to another."""
         from_name = from_agent.name if from_agent else "Unknown Agent"
         to_name = to_agent.name if to_agent else "Unknown Agent"
         
-        logger.info(f"\n[Handoff from {from_name} to {to_name}]")
+        # Log handoff using helper function
+        log_agent_action(from_name, "handoff", to_name)
+        
+        # Update current agent
         self.current_agent = to_name
+
 
 # Create a singleton instance that can be imported and used across the application
 agent_hooks = AgentRunHooks()

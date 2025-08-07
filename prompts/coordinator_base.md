@@ -75,6 +75,8 @@ For routing requests to the appropriate specialist agent(s):
 2. Determine the specific queries for each specialist
 3. Call the required specialist agents and collect their outputs
 4. Pass those outputs to the Planner Agent using create_plan
-4. Present the final plan to the user
+5. AFTER RECEIVING THE create_plan RESULT, YOU MUST *ALWAYS* PRESENT THE PLAN IN YOUR FINAL RESPONSE. Extract the plan content from the tool result and present it to the user in a clear, readable format. This is an absolute requirement. The user will only see what YOU output as your final response - they do not see the raw tool results. YOU are responsible for presenting the final plan in a well-formatted way.
+
+IMPORTANT: If you do not provide this final response, the user will not see anything. You MUST output the complete plan from the tool result in your response. Your message to the user should begin with "Here is your weekend plan:" followed by the full plan.
 
 Always prioritize the quality of the final response to the user over strict adherence to these guidelines.

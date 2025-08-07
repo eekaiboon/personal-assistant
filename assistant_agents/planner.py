@@ -268,20 +268,27 @@ async def run_planner_agent(query: str, agent: Agent = None, event_handler: Any 
             # Planning is logged via event hooks
             
             # Format the request for the agent
-            plan_request = f"""
-            Please create a comprehensive plan based on the following specialist outputs:
+            # Format each specialist output carefully to avoid JSON errors
+            # Extract just the content field to avoid nested JSON issues
+            activity_content = input_data.get('activity_results', {}).get('content', 'No activity information available') if input_data.get('activity_results') else 'No activity information available'
+            culinary_content = input_data.get('culinary_results', {}).get('content', 'No culinary information available') if input_data.get('culinary_results') else 'No culinary information available'
+            foodie_content = input_data.get('foodie_results', {}).get('content', 'No restaurant information available') if input_data.get('foodie_results') else 'No restaurant information available'
             
-            USER QUERY: {input_data.get('user_question', '')}
-            
-            ACTIVITY SUGGESTIONS: {json.dumps(input_data.get('activity_results', {}), indent=2)}
-            
-            CULINARY SUGGESTIONS: {json.dumps(input_data.get('culinary_results', {}), indent=2)}
-            
-            RESTAURANT SUGGESTIONS: {json.dumps(input_data.get('foodie_results', {}), indent=2)}
-            
-            Create a well-structured plan that integrates these suggestions with appropriate timing,
-            transitions, and logistics. Include both a narrative description and a structured itinerary.
-            """
+            plan_request = f"""Please create a comprehensive plan based on the following specialist outputs:
+
+USER QUERY: {input_data.get('user_question', '')}
+
+ACTIVITY SUGGESTIONS: 
+{activity_content}
+
+CULINARY SUGGESTIONS: 
+{culinary_content}
+
+RESTAURANT SUGGESTIONS: 
+{foodie_content}
+
+Create a well-structured plan that integrates these suggestions with appropriate timing,
+transitions, and logistics. Include both a narrative description and a structured itinerary."""
             query_to_run = plan_request
         else:
             # Direct user input
@@ -297,8 +304,8 @@ async def run_planner_agent(query: str, agent: Agent = None, event_handler: Any 
     if event_handler is not None:
         hooks = agent_hooks
     
-    # Get max_turns from environment
-    max_turns = int(os.environ.get("MAX_TURNS", 2))
+    # Get max_turns from environment - use higher value for planner as it's more complex
+    max_turns = int(os.environ.get("MAX_TURNS", 5))
     
     # Run the agent
     result = await Runner.run(

@@ -63,3 +63,24 @@ Alternative options:
 Additional information:
 [Any other relevant details, such as timing considerations, what to bring, etc.]
 ```
+
+## Important JSON Structure Requirements
+
+Your response will be processed by other agents that require properly structured data. Always ensure your response includes a machine-readable structured representation of your activity suggestions in this format:
+
+```json
+{
+  "activities": [
+    {
+      "name": "Activity Name",
+      "location": "Full address or area description",
+      "duration": "Estimated duration (e.g., '2 hours')",
+      "cost": "$ or $$ or Free, etc",
+      "suitable_for_toddlers": true/false
+    },
+    {...more activities...}
+  ]
+}
+```
+
+Always verify your JSON is valid with properly closed brackets and braces.
